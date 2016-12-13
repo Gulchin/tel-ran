@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery.min.js"></script>
+    <style>
+        .sq{
+            position: absolute;
+            /*width: 200px;*/
+            height: 200px;
+        }
+        .red{
+            background-color: crimson;
+        }
+        .blue{
+            background-color: aqua;
+        }
+        .bigW{
+            width: 100vw;
+        }
+        .smalW{
+            width: 200px;
+        }
+        .border{
+            border: 10px solid rebeccapurple;
+        }
+    </style>
+</head>
+<body>
+<div id="d" class="sq red smalW"></div>
+<script>
+    var d=$("#d");
+    d.on("click",function () {
+        d.toggleClass("red");
+        d.toggleClass("blue");
+        d.toggleClass("bigW");
+        d.toggleClass("smalW");
+        d.toggleClass("border");
+    })
+</script>
+</body>
+</html>

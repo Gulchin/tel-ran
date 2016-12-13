@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #container{
+            position: absolute;
+            top: 10vh;
+            left: 30vw;
+            border: 1px solid darkblue;
+            border-radius: 1vh;
+            box-shadow: darkblue 10px 10px 10px;
+            font-family: Arial;
+            font-size: 2vw;
+            text-align: right;
+            padding: 2vw;
+            background-color: lightcyan;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <input id="firstName" type="text" name="firstName" placeholder="first name"/><br>
+    <input id="lastName" type="text" name="lastName" placeholder="last name"/><br>
+    <input id="age" type="number" min="0" max="120" name="age" value="16"><br><br>
+    <input id="married" type="checkbox" name="married"/>Married<br><br>
+    <input type="radio" name="gender" value="male"/> Male<br>
+    <input type="radio" name="gender" value="female" checked/> Female<br>
+    <input type="radio" name="gender" value="other"/> Other<br>
+    <button id="submit">Send data</button>
+    <button id="clear">Clear</button>
+</div>
+<script>
+    var res={};// new Object()
+
+    document.getElementById("submit").onclick=function () {
+        res.fname=document.getElementById("firstName").value;
+        res.lname=document.getElementById("lastName").value;
+        res.age=document.getElementById("age").value;
+        res.married=document.getElementById("married").checked;
+        var genderButtons=document.getElementsByName("gender");
+        for(var i=0;i<genderButtons.length;i++){
+            if(genderButtons[i].checked){
+                res.gender=genderButtons[i].value;
+                break;
+            }
+        }
+        console.log(JSON.stringify(res));
+    }
+</script>
+</body>
+</html>

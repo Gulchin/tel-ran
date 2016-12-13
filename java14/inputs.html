@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title> Hello!</title>
+	<style>
+		#container{
+			font-family: Arial;
+			position: absolute;
+			top: 400px;
+			left: 600px;
+		}
+		#sp{
+			font-family: Arial;
+			font-size: 30px;
+			color: #660000;
+		}
+	 </style>
+</head>
+<body>
+<div id="container"> 
+	<input id="fName" type="text"/> Pivate name <br>
+	<input id="lName" type="text"/> Family name<br>
+	<button id="ready"> ready </button>
+	<button id="clear"> clear </button><br>
+	<span id="sp"> </span>
+</div>
+</body>
+<script> 
+	var inp1=document.getElementById("fName");
+	var inp2=document.getElementById("lName");
+	var sp=document.getElementById("sp");
+	
+	document.getElementById("ready").onclick=function(){
+		sp.innerText="Congraulations, "+inp1.value+" "+ inp2.value+"! You know to push buttons!";
+	}
+	
+	document.getElementById("clear").onclick=function(){
+		sp.innerText="";
+		inp1.value="";
+		inp2.value="";
+	}
+</script> 
+</html>

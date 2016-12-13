@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+// Дз создать объект Employee с полями name,age,married,salary
+// создать ему набор компораторов
+
+
+   // function sum(a,b){return a+b;}
+
+//    var obj={};
+//    obj.mul=function (a,b) {
+//        return a*b;
+//    }
+//   console.log(obj.mul(5,6));
+    function Book(a,t,y) {
+        this.author=a || "Pushkin";
+        this.title=t || "Eugene Anegin";
+        this.year=y ||1999;
+
+        return "hello";
+    }
+//    console.log(new Book("Tolstoy","Buratino",1937));
+//   console.log(new Book("Hammurapi","Low code",0));
+
+    var lib=[];
+    lib[0]=new Book("Tolstoy","Buratino",1937);
+    lib[1]=new Book();
+    lib[2]=new Book("Hammurapi","Low code",232);
+    lib[3]=new Book("Lermontov","Mtziri",1815);
+
+    lib.sort(coporator("year"));
+    lib.sort(coporator("author"));
+   lib.sort(coporator("title"));
+    console.log(lib);
+
+    function coporator(str) {
+        var obj={
+            "year":function (b1,b2) {
+                return +b1.year-b2.year;
+            },
+            "author": function (b1,b2) {
+                return b1.author.localeCompare(b2.author);
+            },
+            "title":function (b1,b2) {
+                return b1.title.localeCompare(b2.title);
+            }
+        }
+        return obj[str];
+    }
+
+</script>
+
+
+</body>
+</html>

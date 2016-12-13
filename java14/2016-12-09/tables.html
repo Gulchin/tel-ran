@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery.min.js"></script>
+    <style>
+        table{
+          border-collapse: collapse;
+        }
+        #t1{
+            position: absolute;
+        }
+        #t2{
+            position: absolute;
+            left: 400px;
+        }
+        td{
+            width: 100px;
+            height: 100px;
+            border-collapse: collapse;
+            border: 1px solid blue;
+        }
+        .pink{
+            background-color: greenyellow;
+        }
+        .blue{
+            background-color: #4d95ff;
+        }
+    </style>
+</head>
+<body>
+<table id="t1">
+    <tr>
+        <td></td>        <td></td>        <td></td>
+    </tr>
+    <tr>
+        <td></td>        <td></td>        <td></td>
+    </tr>
+    <tr>
+        <td></td>        <td></td>        <td></td>
+    </tr>
+</table>
+<table id="t2">
+    <tr>
+        <td></td>        <td></td>        <td></td>
+    </tr>
+    <tr>
+        <td></td>        <td></td>        <td></td>
+    </tr>
+    <tr>
+        <td></td>        <td></td>        <td></td>
+    </tr>
+</table>
+
+<script>
+    $("td").addClass("pink");
+    $("#t1").find("td").addClass("blue");
+</script>
+
+</body>
+</html>

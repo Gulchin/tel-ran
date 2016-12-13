@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table,td {
+            border: 1px solid lightblue;
+            border-collapse: collapse;
+            padding: 30px;
+        }
+
+        </style>
+</head>
+<body>
+<table id="tbl">
+    <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+</table>
+<script>
+    var tds=document.querySelectorAll("#tbl td");
+
+    for (var i=0;i<tds.length;i++){
+        tds[i].onmouseover=function () {
+                var arr=getNeighbours(this);
+                for (var j=0;j<arr.length;j++){
+                    arr[j].style.backgroundColor="#ff0000";
+                }
+            this.style.backgroundColor="#f4f440";
+        }
+        tds[i].onmouseout=function () {
+            var arr=getNeighbours(this);
+            for (var j=0;j<arr.length;j++){
+                arr[j].style.backgroundColor="#ffffff";
+            }
+            this.style.backgroundColor="#ffffff";
+        }
+    }
+
+    function getNeighbours(element) {
+        var res=[];
+        if (element==null) return res;
+        var cellIndex=element.cellIndex;
+        var row=element.parentElement;
+        var tbl=row.parentElement;
+        var rowIndex=row.sectionRowIndex;
+        var startCol=cellIndex-1<0 ? 0: cellIndex-1;
+        var endCol=cellIndex+1>=row.cells.length ? row.cells.length-1 : cellIndex+1;
+        var startRow=rowIndex-1<0 ? 0 :rowIndex-1;
+        var endRow=rowIndex+1>=tbl.rows.length ?tbl.rows.length-1 : rowIndex+1;
+        for (var i=startCol;i<=endCol;i++){
+            res.push(tbl.rows[startRow].cells[i]);
+            res.push(tbl.rows[endRow].cells[i]);
+        }
+        res.push(tbl.rows[rowIndex].cells[startCol]);
+        res.push(tbl.rows[rowIndex].cells[endCol]);
+        return res;
+    }
+    </script>
+
+</body>
+</html>

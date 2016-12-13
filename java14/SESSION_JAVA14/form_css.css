@@ -1,0 +1,41 @@
+.contact{
+    width: 120vh;
+    font-size: 0.8em;
+}
+.contact label{
+    padding-right: 30px;
+}
+.contact input{
+    width: 40%;
+    height: 30px;
+    border: 2px solid grey;
+    border-radius: 5px;
+    padding-right: 30px;
+    background-image: url("form_img/star.gif");
+    background-repeat: no-repeat;
+    background-size: 10px 10px;
+    background-position: 98%;
+}
+.contact .hint{
+    background-color: hotpink;
+    border-radius: 5px;
+    font-size: 0.7em;
+    color: white;
+    padding: 10px;
+    font-weight: bold;
+    display: none;
+}
+.contact input:focus:invalid{
+    background-image: url("form_img/znak.gif");
+    border-color: hotpink;
+}
+.contact input:focus:valid{
+    background-image: url("form_img/galochka-check_16x16.png");
+    border-color: green;
+}
+.contact input:focus + .hint{
+    display: inline;
+}
+.contact input:focus:valid + .hint{
+    background-color: #55aa8e;
+}

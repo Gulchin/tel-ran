@@ -1,0 +1,40 @@
+.target-def{
+    width: 40vh;
+    border: 3px solid cornflowerblue;
+    margin: auto;
+}
+.target-def span{
+    background-color: cornflowerblue;
+    color: white;
+    display: block;
+    padding: 15px;
+}
+.target-def span a{
+    color: white;
+    display: block;
+    float: right;
+    text-decoration: none;
+    border: 2px solid white;
+    padding-right: 5px;
+    padding-left: 5px;
+    border-radius: 50%;
+    font-weight: bold;
+}
+#about{
+    display: block;
+    padding: 15px;
+}
+#about p{
+    font-size: smaller;
+    color: steelblue;
+}
+#about a{
+    color: red;
+    font-size: smaller;
+}
+#about:not(:target){
+    display: none;
+}
+#about:target{
+    display: block;
+}

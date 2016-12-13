@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function trigo(str) {
+        var obj={
+            sin: function (x) {return Math.sin(x);},
+            cos: function (x) {return Math.cos(x);},
+            tg: function (x) {return Math.tan(x);}
+        }
+        return obj[str];
+    }
+    console.log(trigo("sin"));
+    console.log(trigo("cos")(0));
+</script>
+</body>
+</html>

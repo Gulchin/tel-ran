@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var arr = [];
+
+    /*arr["Masha"] = 888;*/
+
+    for (var i=1; i<10; i++)arr.push(i*i);
+    console.log(arr);
+    /*arr.unshift(9);
+    arr.unshift(11)*/;
+    arr.splice(3,4,888,999,666);
+    console.log(arr);
+
+    /*arr.sort(function(a,b){
+        if (a%2 != b%2) return a%2==0 ? -1 : 1;
+        return a%2==0 ? b-a : a-b;
+    });
+    console.log(arr);
+
+    var arr1 = arr.filter(function(x){
+        var num = x;
+        var sum = 0;
+        while(num > 0){
+            sum= sum+num%10;
+            num = Math.floor(num/10);
+        }
+        return sum > 10;
+    })
+    console.log(arr1);*/
+</script>
+</body>
+</html>

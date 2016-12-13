@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #container{
+            position: absolute;
+            top: 100px;
+            left: 400px;
+        }
+        #soups{
+            width: 200px;
+            font-size: 30px;
+        }
+    </style>
+
+</head>
+<body>
+<div id="container">
+    <select id="soups" multiple>
+        <option>
+            Borzsh
+        </option>
+        <option>
+            Shtchee
+        </option>
+        <option selected>
+            Okroshka
+        </option>
+        <option>
+            Turia
+        </option>
+        <option>
+            Marak of
+        </option>
+        <option>
+            Taratuta
+        </option>
+    </select>
+    <button id="press"> Nyam</button>
+</div>
+
+
+<script>
+    document.getElementById("press").onclick=function () {
+       alert(JSON.stringify(document.getElementById("soups")));
+
+    }
+</script>
+
+</body>
+</html>

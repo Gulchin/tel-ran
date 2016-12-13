@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OPA</title>
+    <style>
+        *{
+         margin: 0px;
+        }
+        .menubar{
+            font-size: 0px;
+        }
+        .but{
+            height: 4vh;
+            font-size: 3vh;
+            padding: 1.5vh;
+            border-top-left-radius: 1vh;
+            border-top-right-radius: 1vh;
+            font-family: Arial;
+            display: inline-block;
+        }
+        .red{
+            background-color: lightpink;
+            color: red;
+        }
+        .green{
+            background-color: lightgreen;
+            color: darkgreen;
+        }
+        .blue{
+            background-color: lightblue;
+            color: darkblue;
+        }
+        .cont{
+            position: absolute;
+            width: 100vw;
+            height: 93vh;
+            font-family: Arial;
+            font-size: 15vh;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div id="menu" class="menubar">
+    <div class="but red" value="red">Red</div>
+    <div class="but green" value="green">Green</div>
+    <div class="but blue" value="blue">Blue</div>
+</div>
+<div class="content">
+    <div id="red" class="cont red">Red</div>
+    <div id="green" class="cont green">Green</div>
+    <div id="blue" class="cont blue">Blue</div>
+</div>
+<script>
+    //var buts=document.getElementById("menu").children;
+    var buts=document.getElementsByClassName("but");
+    var currIndex=1;
+    for(var i=0;i<buts.length;i++){
+        buts[i].onclick=function () {
+            getDiv(this).style.zIndex=++currIndex;
+        }
+    }
+    function getDiv(but) {
+        return document.getElementById(but.getAttribute("value"));
+    }
+  // var buts=document.getElementsByClassName("menubar")[0].children;
+</script>
+</body>
+</html>

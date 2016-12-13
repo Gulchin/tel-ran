@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #first{
+            width: 300px;
+            height: 300px;
+            background-color: red;
+        }
+        body{
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+        }
+        </style>
+</head>
+<body>
+<div id="first">
+</div>
+<script>
+    var body=document.body.onclick=function (e) {
+        console.log("X: "+e.clientX+" Y: "+e.clientY);
+    }
+    var first=document.getElementById("first");
+   // first.onclick=changeColor;
+   // first.style.backgroundColor="red";
+   // first.onclick=addBorder;
+    first.addEventListener("click",changeColor);
+    first.addEventListener("click",addBorder);
+      //  first.on("click",addBorder());
+    function changeColor () {
+        if(first.style.backgroundColor!="green") first.style.backgroundColor="green";
+        else first.style.backgroundColor="red";
+        first.removeEventListener("click",changeColor);
+    }
+
+    function addBorder() {
+        if(first.style.border!="10px solid blue") first.style.border="10px solid blue";
+        else first.style.border="hidden";
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var arr=[3,-8,11,3,45,-25,0,5,34,8];
+    arr.sort(); //как строки
+    //как числа
+    function comp1(a,b) {
+        return a-b;
+    }
+    comp2=function (a,b) {
+        return a-b;
+    }
+
+ //   arr.sort(function (arg1,arg2) {return arg1-arg2;})
+ /*   arr.sort(function (a,b) {
+        if(a%2==0){
+            if(b%2==0) {
+                return b-a;
+            } else {
+                return -1;
+            }
+        } else{
+            if(b%2!=0){
+                return a-b;
+            } else {
+                return 1;
+            }
+        }
+    })*/
+
+    arr.sort(function (a,b) {
+     var a2=a%2;
+        var b2=b%2;
+        if (a2==b2) return a2 ? a-b : b-a;
+        return a2==0 ? -1:1;
+    })
+   // arr.sort(comp2);
+    console.log(arr);
+    //дз написать сортировку, которая принимает компоратор
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #container{
+            position: absolute;
+            top: 100px;
+            left: 300px;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <input id="input" type="radio" checked="true" name="group"/> Salad <br>
+    <input id="input1" type="radio" name="group"/> Soup<br>
+    <input id="input2" type="radio" name="group"/> Meat<br>
+    <button id="but">value</button>
+</div>
+
+<script>
+    document.getElementById("but").onclick=function () {
+        alert(document.getElementById("input").checked);
+    }
+</script>
+
+</body>
+</html>

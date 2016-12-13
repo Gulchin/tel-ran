@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+        }
+        .container{
+            position: absolute;
+            width: 60vmin;
+            left: 20vw;
+            top: 10vh;
+            height: 90vh;
+        }
+        .circle{
+            position: absolute;
+            background-color: turquoise;
+            width: 50vmin;
+            height: 50vmin;
+            border-radius: 50%;
+            left: 5.1vmin;
+            top: 20vh;
+        }
+        .sector{
+            position: absolute;
+            width: 25vmin;
+            height: 50vmin;
+            left: 30vmin;
+            top: 20vh;
+            border-top-right-radius: 50vmin;
+            border-bottom-right-radius: 50vmin;
+        }
+        .first{
+            background-color: purple;
+        }
+        .second{
+            background-color: purple;
+            transform: rotate(30deg);
+            transform-origin: left center;
+        }
+        .third{
+            background-color: plum;
+            transform: rotate(120deg);
+            transform-origin: left center;
+            top: 20.1vh;
+        }
+        h1{
+            text-align: center;
+            margin: auto;
+            font-family: Helvetica;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Magic pie diagram 7:3:2 </h1>
+    <div class="circle"></div>
+    <div class="third sector"></div>
+    <div class="first sector"></div>
+    <div class="second sector"></div>
+</div>
+
+</body>
+</html>

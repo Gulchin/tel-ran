@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="blue.css">
+</head>
+<body>
+<div class="container">
+<div class="place">
+<input type="text" id="inp"/> <span id="res"> </span>
+</div>
+<div class="place">
+<button id="but" class="but"> test</button>
+</div>
+</div>
+
+<script>
+    document.getElementById("but").onclick= function () {
+        document.getElementById("res").innerText=checkBrackets(document.getElementById("inp").value);
+    }
+    function checkBrackets(str) {
+        if(str.length==0) return true;
+        var lsq=0;
+        var rsq=0;
+        var lro=0;
+        var rro=0;
+        var lfi=0;
+        var rfi=0;
+        var insidesq="";
+        var insidero="";
+        var insidefi="";
+        for(var i=0;i<str.length;i++){
+            var char=str.charAt(i);
+            switch (char){
+                case "[":
+                    lsq++;
+                    break;
+                case "]":
+                    rsq++;
+                        if (rsq>lsq) return false;
+                    break;
+                case "(":
+                    lro++;
+                    break;
+                case ")":
+                    rro++;
+                    if (rro>lro) return false;
+                    break;
+                case "{":
+                    lfi++;
+                    break;
+                case "}":
+                    rfi++;
+                    if(rfi>lfi) return false;
+                    break;
+
+            }
+            if (lsq>rsq) insidesq+=char;
+            if (lro>rro) insidero+=char;
+            if (lfi>rfi) insidefi+=char;
+
+            if (lsq==rsq&&lsq)  {
+                //console.log(insidesq.slice(1));
+                if (!checkBrackets(insidesq.slice(1))) return false;
+                insidesq="";
+            }
+            if (lro==rro&&lro)  {
+                //console.log(insidero.slice(1));
+                if (!checkBrackets(insidero.slice(1))) return false;
+                insidero="";
+            }
+            if (lfi==rfi&&lfi)  {
+                //console.log(insidefi.slice(1));
+                if (!checkBrackets(insidefi.slice(1))) return false;
+                insidefi="";
+            }
+        }
+        if (lsq!=rsq||lro!=rro||lfi!=rfi) return false;
+        return true;
+    }
+
+    console.log(checkBrackets("[()[][]{g}]"));
+    </script>
+</body>
+</html>

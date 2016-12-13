@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+Amount NIS<input type="number" id="amount"/>
+<select id="from"></select>
+
+ is equal to <select id="to"></select><span id="res"> </span><br>
+<button id="but">Calculate</button>
+<script>
+    var sum=document.getElementById("amount");
+    var xhr=new XMLHttpRequest();
+    var from=document.getElementById("from");
+    var to=document.getElementById("to");
+    var base;
+    var rates;
+    var fromopts=[];
+    var toopts=[];
+    console.log(xhr);
+    xhr.onreadystatechange=function () {
+        if(xhr.readyState!=4) return;
+        console.log(JSON.parse(xhr.responseText).rates);
+        var resp=JSON.parse(xhr.responseText);
+        base=resp.base;
+        rates=resp.rates;
+        makeselect(from);
+        makeselect(to);
+    }
+    xhr.open("GET","http://api.fixer.io/latest");
+    xhr.send();
+
+    function makeselect(select) {
+        var opt=document.createElement("option");
+        opt.innerText=base;
+       // opt.rate=1;
+        rates[base]=1;
+        select.appendChild(opt);
+        for (var key in rates){
+            opt=document.createElement("option");
+            opt.innerText=key;
+        //    opt.rate=rates[key];
+            select.appendChild(opt);
+
+        }
+    }
+
+    document.getElementById("but").onclick=function () {
+        var a=+sum.value;
+        document.getElementById("res").innerText=(a*rates[to.value]/rates[from.value]).toFixed(2);
+
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function Car(m,y,e) {
+        this.model=m;
+        this.year=y;
+        this.engine=e;
+
+        this.toString=function () {
+            return "Model: "+this.model+", year: "+this.year+", engine: "+this.engine;
+        }
+        this.getAll=function () {
+            var res="";
+            for (var key in  this) if (typeof (this[key])!="function") {
+                res=res+key+" : "+this[key]+"; ";
+            }
+            return res;
+        }
+    }
+
+    var c=new Car("Mazda",2016,2.0);
+    console.log(c);
+    console.log(c.toString());
+
+    c.model="Audi";
+    delete c.year;
+    c.color="red";
+
+    console.log(c);
+    console.log(c.toString());
+    console.log(c.getAll());
+    console.log(c["mo"+"del"]);
+    console.log(c["get"+"All"]());
+    console.log(typeof (c));
+    c.price="100 000";
+    console.log(c.getAll());
+
+    var gth=function () {
+        return "go to hell!";
+    }
+
+    c.getAll=gth;
+    console.log(c.getAll());
+</script>
+</body>
+</html>

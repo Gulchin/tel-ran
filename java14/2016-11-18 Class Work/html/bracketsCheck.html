@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    var pairs={
+        "]":"[",
+        ")":"(",
+        "}":"{"
+    }
+
+    function brackets(str) {
+        var buf="";
+        for(var i=0;i<str.length;i++){
+            var c=str.charAt(i);
+            if (c=="(" ||c=="[" ||c=="{"){
+                buf=buf+c;
+            } else if (c==")" ||c=="]" ||c=="}"){
+                if (buf.length==0) return false;
+                if (pairs[c]!=buf[buf.length-1]) return false;
+                buf=buf.substr(0,buf.length-1);
+            }
+        }
+        return buf.length==0;
+    }
+    str="[()[][]{)}]";
+    console.log(str+" :"+brackets(str));
+</script>
+</body>
+</html>

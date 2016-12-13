@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #red{
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+        #yellow{
+            position: absolute;
+            top: 200px;
+            left: 20px;
+            width: 200px;
+            height: 200px;
+            background-color: yellow;
+        }
+        #orange{
+            position: absolute;
+            top: 200px;
+            left: 20px;
+            width: 200px;
+            height: 200px;
+            background-color: orange;
+        }
+        </style>
+</head>
+<body>
+<div id="red">
+    <div id="yellow">
+        <div id="orange">
+
+        </div>
+    </div>
+</div>
+<script>
+    var red=document.getElementById("red");
+    var yellow=document.getElementById("yellow");
+    var orange=document.getElementById("orange");
+    red.onclick=function (e) {
+        this.style.backgroundColor="blue";
+        console.log(e.target);
+    }
+    yellow.onclick=function () {
+        
+    }
+    orange.onclick=function () {
+        this.style.backgroundColor="purple";
+        event.stopPropagation();
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            font-family: Arial;
+            font-size: 3vh;
+        }
+        .picker{
+            display: block;
+            padding: 3vh;
+        }
+        #color{
+            width: 20vh;
+            height: 20vh;
+            position: absolute;
+            top: 5vh;
+            left: 30vmin;
+            border: 1px solid black;
+        }
+        #setColor{
+            position: absolute;
+            top: 30vh;
+            left: 30vmin;
+        }
+        .container{
+            position: absolute;
+            margin: auto;
+            top: 25vh;
+            width: 50vw;
+            left: 25vw;
+            border: 1px solid blue;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <input id="red" class="picker red" type="range" min="0" max="255" value="255"/>R
+    <input id="green" class="picker green" type="range" min="0" max="255" value="255"/>G
+    <input id="blue" class="picker blue" type="range" min="0" max="255" value="255"/>B
+    <div id="color"></div>
+    <span id="setColor"> </span>
+</div>
+<script>
+
+
+    var red=document.getElementById("red");
+    var green=document.getElementById("green");
+    var blue=document.getElementById("blue");
+
+    function addZeros(str) {
+        var num=6-str.length;
+        var res=str;
+        for( var i=0;i<num;i++)res="0"+res;
+        return res;
+    }
+
+    function setColor() {
+        var rr=+red.value;
+        var gg=+green.value;
+        var bb=+blue.value;
+        var color=256*256*rr+256*gg+bb;
+
+        document.getElementById("color").style.backgroundColor="rgb("+
+                red.value+","+ green.value+","+ blue.value+")";
+        document.getElementById("setColor").innerText="#"+addZeros(color.toString(16));
+    }
+    red.oninput=function () {
+        setColor();
+    }
+
+    green.oninput=function () {
+        setColor();
+    }
+    blue.oninput=function () {
+        setColor();
+    }
+    setColor();
+</script>
+</body>
+</html>

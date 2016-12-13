@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            font-family: Arial;
+            font-size: 2vmin;
+        }
+        table{
+            width: 100%;
+        }
+        table,td,th{
+            border: 1px solid deepskyblue;
+            border-collapse: collapse;
+            padding-left: 30px;
+            padding-right: 30px;
+            padding-bottom: 10px;
+            padding-top: 10px;
+            text-align: center;
+        }
+
+        .container{
+            display: none;
+        }
+        .main{
+            position: absolute;
+            width: 50vw;
+            left: 25vw;
+            top: 5vh;
+        }
+        .place{
+            width: 100%;
+            border: 1px solid deepskyblue;
+            background-color: #d9f0fa;
+            margin: 0.5vmin;
+            padding: 1vmin;
+            border-radius: 0.25vmin;
+            text-align: center;
+        }
+        .but{
+            padding-left: 30px;
+            padding-right: 30px;
+            padding-bottom: 5px;
+            padding-top: 5px;
+            background-color: deepskyblue;
+            color: azure;
+        }
+        input{
+            border: 1px solid deepskyblue;
+            padding: 5px;
+        }
+        #func, #func td{
+            border: none;
+        }
+        #area{
+            padding: 1px;
+        }
+        #func td:first-child{
+            text-align: left;
+        }
+        textarea{
+            border: 1px solid deepskyblue;
+        }
+        </style>
+</head>
+<body>
+<div class="main">
+<div class="place">
+<input type="number" id="rows" value="3">
+<button id="changerows" class="but"> Set rows number </button>
+    </div>
+    <div class="place">
+<table>
+    <thead>
+    <tr>
+        <th>
+            Index
+        </th>
+        <th>
+            Input
+        </th>
+        <th>
+            Sorted
+        </th>
+    </tr>
+    </thead>
+    <tbody id="tbody">
+    </tbody>
+
+</table>
+        </div>
+<div class="place">
+<input type="radio" name="sorttype" id="numbersort" checked="checked" value="numComp"> Numerical sort
+<input type="radio" name="sorttype" id="letterrsort"  value="letterComp"> Alphabetical sort
+<input type="radio" name="sorttype" id="ownsort"  value="own"> Own sort
+    </div>
+ <div class="place">
+<button id="sortButton" class="but"> Sort! </button>
+     </div>
+<div class="container place" id="container">
+    <table id="func">
+        <tr>
+    <td>First argument: </td><td><input type="text" id="a"></td>
+        </tr><tr>
+        <td> Second argument: </td><td><input type="text" id="b"></td>
+        </tr>
+    <tr>
+    <td>Code: </td><td id="area"><textarea id="code" name="Text1" cols="30" rows="5"></textarea></td><td>
+    </tr>
+    </table>
+</div>
+</div>
+<script>
+    var tbody=document.getElementById("tbody");
+    var changeRows=document.getElementById("changerows");
+    var rowsInput=document.getElementById("rows");
+    var sortButton=document.getElementById("sortButton");
+    var sortTypes=document.getElementsByName("sorttype");
+    var a=document.getElementById("a");
+    var b=document.getElementById("b");
+    var code=document.getElementById("code");
+    var own=document.getElementById("ownsort");
+    var container=document.getElementById("container");
+    var length;
+
+    function drawRows(n) {
+        var buf="";
+        for (var i=0;i<n;i++){
+            buf+="<tr><td>"+i+"</td> <td><input class='input' type='text' id='inp"+i+"'></td><td class='output' id='out"+i+"'></td><tr>";
+        }
+        tbody.innerHTML=buf;
+    }
+    changeRows.onclick=function () {
+        length=rowsInput.value;
+        drawRows(length);
+    }
+    sortButton.onclick=function () {
+        var arr=[];
+        var inputs=document.getElementsByClassName("input");
+        var outputs=document.getElementsByClassName("output");
+        for(var i=0;i<inputs.length;i++){
+            console.log()
+           arr.push(inputs[i].value);
+        }
+        sort(arr,getComp());
+        for(var i1=0;i1<outputs.length;i1++){
+            outputs[i1].innerText=arr[i1];
+        }
+    }
+
+    function sort(arr,comp) {
+        arr.sort();
+        var step=arr.length;
+        var factor=1.24733;
+
+        while (step>=1){
+            step/=factor;
+            var intStep=Math.round(step);
+            for (var i=0;i<arr.length-intStep;i++){
+                if(comp(arr[i],arr[i+intStep])>0){
+                    var tmp=arr[i];
+                    arr[i]=arr[i+intStep];
+                    arr[i+intStep]=tmp;
+                }
+            }
+        }
+    }
+
+    function numComp(a,b) {
+        return a-b;
+    }
+
+    function letterComp(a,b) {
+        var al=a.toLowerCase();
+        var bl=b.toLowerCase();
+        return al==bl ? 0 :(al>bl ? 1:-1);
+    }
+
+    function getComp() {
+        var comp;
+        for(var i=0;i<sortTypes.length;i++){
+            if(sortTypes[i].checked) {
+                comp=sortTypes[i].value;
+                break;
+            }
+        }
+        switch (comp){
+            case "numComp": return numComp;
+            case "letterComp": return letterComp;
+            case "own": return createOwnComp();
+        }
+    }
+
+    function createOwnComp() {
+        return new Function(a.value,b.value,code.value);
+    }
+    function showOwn() {
+        if(own.checked) {
+            container.style.display="block";
+        } else{
+            container.style.display="none";
+        }
+    }
+
+        for(var i=0;i<sortTypes.length;i++){
+            sortTypes[i].onclick=showOwn;
+        }
+
+
+
+    </script>
+</body>
+</html>

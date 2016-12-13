@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            font-family: Arial;
+
+        }
+        body{
+            width: 100vw;
+            height: 100vh;
+        }
+        .but{
+            padding-left: 30px;
+            padding-right: 30px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border: hidden;
+            outline: none;
+            font-size: 4vh;
+        }
+        .red{
+            color: darkred;
+            background-color: pink;
+        }
+        .green{
+            color: darkgreen;
+            background-color: lightgreen;
+        }
+
+        .blue{
+            color: darkblue;
+            background-color: lightblue;
+        }
+        .yellow{
+            color:gold;
+            background-color: lightyellow;
+        }
+        #navBar{
+            font-size: 0px;
+            width: 100vw;
+        }
+        #container{
+            position: absolute;
+            width: 100vw;
+            left: 0;
+            overflow: hidden;
+        }
+        .page{
+            position: absolute;
+            width: 100vw;
+            font-size: 10vh;
+            text-align: center;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+<div id="navBar">
+    <button id="redBut" class="but red"> Red </button>
+    <button id="greenBut" class="but green">Green</button>
+    <button id="blueBut" class="but blue"> Blue </button>
+    <button id="yellowBut" class="but yellow">Yellow</button>
+</div>
+<div id="container">
+    <div id="redDiv" class="red page">Red page
+        <p>Some text to read 1</p>
+        <p>Some text to read 2</p>
+        <p>Some text to read 3</p>
+        <p>Some text to read 4</p>
+        <p>Some text to read 5</p>
+        <p>Some text to read 6</p>
+        <p>Some text to read 7</p>
+        <p>Some text to read 1</p>
+        <p>Some text to read 2</p>
+        <p>Some text to read 3</p>
+        <p>Some text to read 4</p>
+        <p>Some text to read 5</p>
+        <p>Some text to read 6</p>
+        <p>Some text to read 7</p>
+
+    </div>
+    <div id="greenDiv" class="green page">Green page</div>
+    <div id="blueDiv" class="blue page">Blue page</div>
+    <div id="yellowDiv" class="yellow page">Yellow page
+        <p>Never eat yellow snow</p>
+        <p>Never eat yellow snow</p>
+        <p>Never eat yellow snow</p>
+        <p>Never eat yellow snow</p>
+        <p>Never eat yellow snow</p>
+        <p>Never eat yellow snow</p>
+        <p>Never eat yellow snow</p>
+        <p>Never eat yellow snow</p>
+        <p>Never eat yellow snow</p>
+        <p>Never eat yellow snow</p>
+        <p>Never eat yellow snow</p>
+        <p>Never eat yellow snow</p>
+        <p>Never eat yellow snow</p>
+        <p>Never eat yellow snow</p>
+        <p>Never eat yellow snow</p>
+        <p>Never eat yellow snow</p>
+
+    </div>
+
+</div>
+<script>
+    //Дз
+    var bodyWidth=document.body.offsetWidth
+    var bodyHeight=document.body.offsetHeight;
+    console.log("width: "+ bodyWidth+" height:"+bodyHeight);
+    var container=document.getElementById("container");
+    var navHeight=document.getElementById("navBar").offsetHeight
+    var contHeight=bodyHeight-navHeight;
+    container.style.height=contHeight+"px";
+    var pages=document.querySelectorAll("#container div");
+    for (var i=0;i<pages.length;i++){
+        pages[i].style.height=contHeight+"px";
+
+    }
+    pages[0].style.top=0;
+    pages[0].style.left=0;
+
+    pages[1].style.top=0;
+    pages[1].style.left=bodyWidth+"px";
+
+    pages[2].style.top=contHeight+"px";
+    pages[2].style.left=0;
+
+    pages[3].style.top=contHeight+"px";
+    pages[3].style.left=bodyWidth+"px";
+
+    var scrollTime=2000;
+    var stepTime=10;
+    var step=stepTime/scrollTime;
+    var lastLeft=0;
+    var lastTop=0;
+    var newLeft=0;
+    var newTop=0;
+    var thread;
+
+    document.getElementById("yellowBut").onclick=function () {
+        lastLeft=container.scrollLeft;
+        lastTop=container.scrollTop;
+        newTop=contHeight;
+        newLeft=bodyWidth;
+        thread=setInterval(scrollTo,stepTime);
+        setTimeout(stopScroll,scrollTime+stepTime);
+    }
+
+    document.getElementById("redBut").onclick=function () {
+        lastLeft=container.scrollLeft;
+        lastTop=container.scrollTop;
+        newTop=0;
+        newLeft=0;
+        thread=setInterval(scrollTo,stepTime);
+        setTimeout(stopScroll,scrollTime+stepTime);
+    }
+
+    document.getElementById("greenBut").onclick=function () {
+        lastLeft=container.scrollLeft;
+        lastTop=container.scrollTop;
+        newTop=0;
+        newLeft=bodyWidth;
+        thread=setInterval(scrollTo,stepTime);
+        setTimeout(stopScroll,scrollTime+stepTime);
+    }
+
+    document.getElementById("blueBut").onclick=function () {
+        lastLeft=container.scrollLeft;
+        lastTop=container.scrollTop;
+        newTop=contHeight;
+        newLeft=0;
+        thread=setInterval(scrollTo,stepTime);
+        setTimeout(stopScroll,scrollTime+stepTime);
+    }
+
+    function scrollTo() {
+        container.scrollTop+=(newTop-lastTop)*step;
+        container.scrollLeft+=(newLeft-lastLeft)*step;
+//        if(container.scrollTop==newTop &&container.scrollLeft==newLeft){
+//            clearInterval(thread);
+//
+//        }
+    }
+
+    function stopScroll() {
+        clearInterval(thread);
+        container.scrollLeft=newLeft;
+        container.scrollTop=newTop;
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+
+            width: 200px;
+            height: 200px;
+            position: absolute;
+            left: 200px;
+            top: 200px;
+            outline: none;
+        }
+        .red{
+            background-color: lightcoral;
+        }
+        .green{
+            background-color: lightgreen;
+        }
+        .blue{
+            background-color: skyblue;
+        }
+        .black{
+            background-color: black;
+        }
+    </style>
+
+</head>
+<body>
+<div id="d" class="box red" >
+    <!--tabindex="-1"-->
+</div>
+<script>
+    var d=document.getElementById("d");
+   d.setAttribute("tabindex",-1);
+   d.focus();
+   d.onkeydown=function (e) {
+       console.log(e);
+       var key=e.key;
+       d.classList.remove("red");
+       d.classList.remove("blue");
+       d.classList.remove("green");
+       d.classList.remove("black");
+       switch (key){
+           case "r": d.classList.add("red");break;
+           case "b": d.classList.add("blue");break;
+           case "g": d.classList.add("green");break;
+           case "Escape":break;
+           default: d.classList.add("black");
+       }
+   }
+
+    </script>
+</body>
+</html>

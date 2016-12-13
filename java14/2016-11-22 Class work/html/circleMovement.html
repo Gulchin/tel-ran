@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    function isCircleMove(arr1,arr2) {
+        if (arr1.length != arr2.length) return false;
+        if (arr1.length==0)return true;
+
+        var shifts = [];
+
+        for (var j = 0; j < arr1.length; j++) {
+            if (arr1[0] == arr2[j]);
+            shifts.push(j);
+        }
+        for (var k = 0; k < shifts.length; k++) {
+
+            var shift = shifts[k];
+            var notEqual=false;
+            for (var i = 0; i < arr1.length - shift; i++) {
+                if (arr1[i] != arr2[i + shift]){
+                    notEqual=true;
+                    break;
+                }
+            }
+
+            for (var i = arr1.length - shift; i < arr1.length; i++) {
+                if (arr1[i] != arr2[i - arr1.length + shift]) {
+                    notEqual=true;
+                    break;
+                }
+            }
+            if (!notEqual)
+                return true;
+        }
+
+        return false;
+    }
+
+
+    var ar2=[3,3,5,7,9,13,3];
+    var ar3=[7,9,13,3,3,3,5];
+    console.log(isCircleMove(ar3,ar2));
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .square{
+            position: absolute;
+            top: 200px;
+            left: 400px;
+            width: 200px;
+            height: 200px;
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+<div id="square" class="square"></div>
+
+<script>
+    var  square=document.getElementById("square");
+    square.onmouseover=function () {
+        square.style.backgroundColor="green";
+    }
+
+    square.onmouseout=function () {
+        square.style.backgroundColor="red";
+
+    }
+</script>
+</body>
+</html>

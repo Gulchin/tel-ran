@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" id="inp"/> <span id="res"> </span>
+<button id="but"> test</button>
+
+<script>
+    console.log(isEmail("f@ff@ff.ff"));
+    document.getElementById("but").onclick= function () {
+        document.getElementById("res").innerText=isEmail(document.getElementById("inp").value);
+    }
+    function isEmail(str) {
+      if (str.indexOf("@")==-1||str.indexOf(".")==-1) return false;
+        var arr=str.split("@");
+        if(arr.length>2)return false;
+        if(arr[0].length<1 || arr[1].length<4) return false;
+        var arr2=arr[1].split(".");
+        if(arr2.length>2)return false;
+        return (arr2[0].length>=1 && arr2[1].length>=2);
+    }
+    // Дз есть строка возможно со скобками, а может без. Скобки бывают разные.
+    // () {} [] проверить чтобы все скобки закрывались
+    // Скобки не должны перескаться ([)]
+    // вот так не должно быть )(
+</script>
+
+</body>
+</html>

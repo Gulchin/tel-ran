@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .red{
+            background-color: #ffff00;
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+<div class="red" id="circle">
+</div>
+<script>
+    var circle=document.getElementById("circle");
+    var topNew=600;
+    var leftNew=1000;
+    var tanim=5000;
+    var tstep=40;
+    var x0=circle.offsetLeft;
+    var y0=circle.offsetTop;
+//    var newColor="0xff0000"
+//    var color0="#ffff00".parseInt(16);
+    var grin=255;
+    var stepRGB=255*tstep/tanim
+    //var tCur=0;
+
+    var xStep=(leftNew-x0)*tstep/tanim;
+    var yStep=(topNew-x0)*tstep/tanim;
+
+    var th=setInterval(function () {
+        var x=circle.offsetLeft;
+        var y=circle.offsetTop;
+        circle.style.left=x+xStep+"px";
+        circle.style.top=y+yStep+"px";
+        grin-=stepRGB;
+        console.log(grin);
+       circle.style.backgroundColor="rgb(255,"+Math.floor(grin)+",0)";
+       // circle.style.backgroundColor=makeRGB(255,grin,0);
+        if (x+xStep>=leftNew || y+yStep>=topNew) clearInterval(th);
+    },tstep)
+</script>
+</body>
+</html>

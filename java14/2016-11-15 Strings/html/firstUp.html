@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .block{
+            width: 100px;
+            height: 100px;
+            float: right;
+            background-color: red;
+            margin: 10px;
+            display: table-cell;
+            vert-align:  middle;
+            text-align: center;
+        }
+        </style>
+</head>
+<body>
+<script>
+    function firstUp(str) {
+        var arr=str.split(" ");
+        for (var i=0; i<arr.length;i++) arr[i]=arr[i].charAt(0).toUpperCase()+arr[i].slice(1);
+        return arr.join(" ");
+    }
+    console.log(firstUp("hello world!"));
+    console.log(getPath2("https://docs.oracle.com/javase/tutorial/java/generics/bounded.html"));
+    console.log(getArgs("https://docs.oracle.com/java? name= vasya&age=28&country=Israel"));
+    function getPath(str) {
+        var arr=str.split("/");
+        return "/"+arr[arr.length-1];
+    }
+
+    function getPath2(str) {
+        return str.slice(str.lastIndexOf("/"));
+    }
+
+    function getArgs(str) {
+        var qpos=str.lastIndexOf("?");
+        if(qpos<0||!qpos)return{};
+        var arr= str.slice(+qpos+1).split("&");
+        var res={};
+        for(var i=0;i<arr.length;i++){
+            var epos=+arr[i].indexOf("=");
+            res[arr[i].substring(0,epos).trim()]=arr[i].substring(epos+1).trim();
+        }
+        return res;
+    }
+
+    console.log(inverWords("sasha is a goof boy"));
+    console.log(isPolindrom("was it a car or a cat i saw"));
+    function inverWords(str) {
+        var arr=str.split(" ");
+        for(var i=0;i<arr.length;i++){
+            var drow="";
+            var word=arr[i];
+            for (var j=word.length-1;j>=0;j--){
+                drow+=word.charAt(j);
+            }
+            arr[i]=drow;
+        }
+        return arr.join(" ");
+    }
+
+    function isPolindrom(str) {
+        var arr=str.split(" ");
+        var strtrimed="";
+        var rtstrimed=""
+        for(var i=0;i<arr.length;i++){
+            strtrimed+=arr[i].trim();
+            var dorw="";
+            for (j=arr[i].length-1;j>=0;j--){
+                dorw+=arr[i].trim().charAt(j);
+            //    document.write("<div class='block'>"+arr[i].trim().charAt(j)+"</div>")
+            }
+            rtstrimed=dorw+rtstrimed;
+        }
+        console.log(strtrimed);
+        console.log(rtstrimed);
+        return strtrimed==rtstrimed;
+
+    }
+
+
+</script>
+</body>
+</html>

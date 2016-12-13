@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+        }
+        body{
+            font-size: 10vh;
+            color: darkblue;
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+<span id="910">Hello, world! </span>
+<script>
+    document.body.onclick=function () {
+        if(document.body.style.color!="darkblue"){
+            document.body.style.color="darkblue";
+        } else {
+            document.body.style.color="red";
+        }
+    }
+</script>
+</body>
+</html>

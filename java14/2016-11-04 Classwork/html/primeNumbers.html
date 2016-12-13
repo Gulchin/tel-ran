@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
+    .container{
+        position: absolute;
+        width: 60%;
+        height: 20vh;
+        top: 10%;
+        left: 20%;
+        font-family: "Helvetica Neue";
+        font-size: 3vh;
+        padding-top: 10vh;
+        padding-bottom: 10vh;
+        border: 2vh solid #FF000B;
+        border-radius: 3vh;
+        text-align: center;
+        line-height: 1.5em;
+    }
+    .res{
+        display: none;
+        color:#FF000B;
+    }
+
+    .input{
+        font-family: "Helvetica Neue";
+        font-size: 2.5vh;
+    }
+    /*.label{*/
+        /*display: none;*/
+    /*}*/
+    .input:focus{
+        background-color: lightskyblue;
+    }
+        .button{
+            position: absolute;
+            font-family: "Helvetica Neue";
+            font-size: 3vh;
+            left: 50%;
+            top: 98%;
+            transform: translate(-50%,-100%);
+            padding-bottom: 0.5vh;
+            padding-top: 0.5vh;
+            padding-left: 4vh;
+            padding-right: 4vh;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <button id="test" class="button">Test</button>
+    <div>
+<span class="label"> Input a number:</span> <br>
+<input id="inp" class="input" type="text"> <br>
+<span id="res"class="res">Only numbers allowed</span>
+    </div>
+
+</div>
+<script>
+    var inp=document.getElementById("inp");
+    var res=document.getElementById("res");
+    var testButton=document.getElementById("test");
+    var colorOk="#338A47";
+    var colorBad="#FF000B";
+    var container=document.getElementsByClassName("container")[0];
+    var label=document.getElementsByClassName("label")[0];
+
+    onFocusInput();
+
+    testButton.onclick=function () {
+        res.style.color="red";
+        container.style.borderColor="red";
+        res.style.backgroundColor="lightpink";
+        container.style.backgroundColor="lightpink";
+//        label.style.display="none";
+        var output=isPrime(inp.value);
+        show(output);
+    }
+
+    function onFocusInput() {
+        res.style.backgroundColor="aliceblue";
+        container.style.backgroundColor="aliceblue";
+        res.style.color="blue";
+        container.style.borderColor="blue";
+        res.style.display="none";
+//        label.style.display="inline";
+    }
+
+    inp.onfocus=onFocusInput();
+    inp.onkeydown=function (e) {
+        if(e.keyCode==13) testButton.click();
+    }
+    function show(value) {
+        res.innerText=value;
+        res.style.display="inline";
+    }
+
+    function isPrime(value) {
+        if (value<0||value==="0") return "Value must be grater than 0";
+        if(!value) return "Incorrect input";
+        var num=+value;
+        if(!num) return "Input is not a number";
+        if(num!=Math.floor(num)) return "Sorry, doesn't work with floats";
+        if(num==1) return "There are different opinions about 1";
+        var divider=findDivider(num);
+        res.style.color=colorOk;
+        container.style.borderColor=colorOk;
+        res.style.backgroundColor="lightgreen";
+        container.style.backgroundColor="lightgreen";
+        if (divider==num) return num+" is a prime number.";
+        return num+" is composite number. It can be divide by "+divider+".";
+    }
+    
+    function findDivider(num) {
+        var n=num;
+        var divider=2;
+        var last=num;
+
+        while (divider<last){
+            var reminder=n%divider;
+            if(!reminder) {
+                return divider;
+            }
+            divider++;
+            last=(n-reminder)/divider+1;
+        }
+        return n;
+
+    }
+
+</script>
+</body>
+</html>

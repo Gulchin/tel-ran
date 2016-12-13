@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div {
+            border: 1px solid turquoise;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+<div id="soups">
+    <p>Borzsh </p>
+    <p>Shee </p>
+    <p>Solyanka </p>
+</div>
+<div id="meals">
+    <p>Ragu </p>
+    <p>Pasta </p>
+    <p>Kebab </p>
+</div>
+<div id="drinks">
+    <p>Vodka </p>
+    <p>Wine </p>
+    <p>Juice </p>
+</div>
+<script>
+    var divs=document.querySelectorAll("div");
+    for (var i=0;i<divs.length;i++) divs[i].onclick=function(){
+       var selector="#"+this.id+" p";
+        var arr=document.querySelectorAll(selector);
+        for (var j=0;j<arr.length;j++) console.log(arr[j].innerText);
+    }
+
+
+
+</script>
+</body>
+</html>

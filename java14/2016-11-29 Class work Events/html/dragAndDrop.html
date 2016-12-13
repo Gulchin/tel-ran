@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #first{
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            left: 100px;
+            top: 100px;
+            background-color: gold;
+        }
+    </style>
+</head>
+<body>
+<div id="first">
+
+</div>
+
+<script>
+    //Дз написать функцию dnd которая получает элемет и делает его драг энд дпропным.
+    var f=document.getElementById("first");
+
+    f.onmousedown = function (e) {
+        var t0=f.offsetTop;
+        var l0=f.offsetLeft;
+
+        var x0=e.screenX;
+        var y0=e.screenY;
+        var cursor=getComputedStyle(f).cursor;
+        f.style.cursor="pointer";
+
+        document.addEventListener("mousemove",move);
+        document.onmouseup=addEventListener("mouseup",up);
+
+        function move(event) {
+            var x=event.screenX;
+            var y=event.screenY;
+
+            f.style.top=(t0+(y-y0))+"px";
+            f.style.left=(l0+(x-x0))+"px";
+        }
+
+        function up() {
+            document.removeEventListener("mousemove",move);
+            document.removeEventListener("mouseup",up);
+            f.style.cursor=cursor;
+        }
+    }
+</script>
+
+</body>
+</html>

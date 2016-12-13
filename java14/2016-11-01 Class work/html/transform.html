@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .first{
+            position: absolute;
+            width: 150px;
+            height: 300px;
+            background-color: rgba(0,255,255,0.3);
+            left: 50%;
+            top: 30%;
+
+            border-top-right-radius: 200px;
+            border-bottom-right-radius: 200px;
+            transform-origin: left center;
+            transform: rotate(180deg);
+            transition: transform 5s;
+
+        }
+        .second{
+            position: absolute;
+            width: 150px;
+            height: 300px;
+            background-color: rgba(255,0,0,0.3);
+            left: 50%;
+            top: 30%;
+            border-top-right-radius: 200px;
+            border-bottom-right-radius: 200px;
+            transform-origin: left center;
+            transition: transform 5s;
+
+        }
+        .second:hover{
+            transform: rotate(360deg);
+            transform-origin: left center;
+        }
+        .first:hover{
+            transform: rotate(540deg);
+            transform-origin: left center;
+        }
+    </style>
+
+</head>
+<body>
+<div class="second"></div>
+<div class="first"></div>
+ДЗ сделать пай-чат с соотношением секторов 7:3:2
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table, td{
+            border-collapse: collapse;
+        }
+        td{
+            height: 60px;
+            width: 60px;
+
+            border: 10px solid #42bdd0;
+        }
+    </style>
+</head>
+<body>
+<table id="tbl">
+    <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+        <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+        <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+        <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+        <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+        <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+        <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+        <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+
+</table>
+<script>
+   var tbl=document.getElementById("tbl");
+   tbl.onclick=function (e) {
+      // e.target.style.backgroundColor="blue";
+       changeColor(e.target);
+   }
+
+   function changeColor (elem) {
+       if(elem.style.backgroundColor!="green") elem.style.backgroundColor="green";
+       else elem.style.backgroundColor="white";
+   }
+
+</script>
+</body>
+</html>

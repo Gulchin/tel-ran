@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var a="3";
+    switch (a) {
+        // uses ===
+        case 1: console.log("number 1");
+            break;
+        case "3": console.log("number 3");
+            break;
+
+        default: console.log("default");
+    }
+
+    var b=3;
+
+    if(b>5) console.log("grater then 5");
+     else console.log("less then 5");
+
+    if(b) console.log("not zero");
+
+    var c=0;
+    if(c) console.log("not zero");
+    else console.log("zero");
+
+    var d="";
+    if(d) console.log("not zero");
+    else console.log("zero");
+
+    if ("A"-"B") console.log(true);
+    else console.log(false);
+
+    if (null) console.log(true);
+    else console.log(false);
+
+    var e;
+    if (e) console.log(true);
+    else console.log(false);
+
+    var a=3;
+    if(a=5)console.log(true);
+    else console.log(false);
+
+    var f;
+    var i=f||8;
+    console.log(i);
+
+    var j=5;
+    var g=j||8;
+    console.log(g);
+
+    var h=5;
+    var n=0||h>10;
+    console.log(n);
+
+    console.log(3||5);
+
+    console.log(3&&5&&7);
+
+    console.log(4/0||0);
+</script>
+</body>
+</html>

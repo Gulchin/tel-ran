@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+        }
+        .container{
+            position: absolute;
+            width: 60vmin;
+            left: 20vw;
+            height: 90vh;
+
+        }
+        .circle{
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid  deepskyblue;
+
+        }
+        .inner{
+            background-color: white;
+            width: 50vmin;
+            height: 50vmin;
+            left: 10vmin;
+            top: 25vh;
+        }
+        .outer{
+            background-color: rgba(255,255,255,0);
+            width: 59.5vmin;
+            height: 59.5vmin;
+            left: 5vmin;
+            top: 20vh;
+        }
+        .sector{
+            position: absolute;
+            width: 30vmin;
+            height: 60vmin;
+            left: 35vmin;
+            top: 20vh;
+            border-top-right-radius: 30vmin;
+            border-bottom-right-radius: 30vmin;
+            transform-origin: left center;
+            transition: transform 2s;
+        }
+        .first{
+            background-color: deepskyblue;
+        }
+        .second{
+            background-color: white;
+            transform-origin: left center;
+            transform: rotate(90deg);
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+
+
+    <div id="sector" class="first sector"></div>
+    <div id="sector2" class="second sector"></div>
+    <div class="outer circle"></div>
+    <div class="inner circle">
+        <span id="percent"> </span>
+    </div>
+
+</div>
+
+</body>
+<script>
+    var sector=document.getElementById("sector");
+    var sector2=document.getElementById("sector2");
+    var currentRotation=0;
+    var currentDelta=90;
+    var currentDeltaRotation=+currentRotation+currentDelta;
+
+    function Rotate() {
+        currentRotation=currentRotation+5;
+        currentDeltaRotation=+currentRotation+currentDelta;
+        sector.style.transform="rotate("+currentRotation+"deg)";
+        sector2.style.transform="rotate("+currentDeltaRotation+"deg)";
+    }
+
+    function changeDelta() {
+        currentDelta=currentDelta-2;
+        if(currentDelta<2){
+            currentDelta=2;
+        }
+
+    }
+
+   setInterval(Rotate,50);
+    setInterval(changeDelta,50);
+</script>
+</html>

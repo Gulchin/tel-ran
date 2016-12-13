@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table,td {
+            border: 1px solid lightblue;
+            border-collapse: collapse;
+            padding: 30px;
+        }
+
+        </style>
+</head>
+<body>
+<table id="tbl">
+    <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+</table>
+<script>
+    var tds=document.querySelectorAll("#tbl td");
+//    var trs=document.querySelectorAll("#tbl tr");
+    for (var i=0;i<tds.length;i++){
+        tds[i].onclick=function () {
+            console.log("row: "+this.parentElement.sectionRowIndex+ ", cell: "+ this.cellIndex);
+            this.innerText=(this.parentElement.sectionRowIndex+1)*(this.cellIndex+1);
+        }
+        tds[i].onmouseover=function () {
+            var num=+this.cellIndex+1;
+            var arr=document.querySelectorAll("#tbl td:nth-child("+num+")");
+            for (var j=0;j<arr.length;j++){
+                arr[j].style.backgroundColor="#f4f440";
+            }
+        }
+        tds[i].onmouseout=function () {
+            var num=+this.cellIndex+1;
+            var arr=document.querySelectorAll("#tbl td:nth-child("+num+")");
+            for (var j=0;j<arr.length;j++){
+                arr[j].style.backgroundColor="#ffffff";
+            }
+        }
+    }
+// Дз сделать так, если наезжаешь на ячейку он становится желтой, а то что рядом красным
+//    for (var i=0;i<trs.length;i++){
+//        trs[i].onclick=function () {
+//            console.log(this.s);
+//        }
+//    }
+    </script>
+
+</body>
+</html>

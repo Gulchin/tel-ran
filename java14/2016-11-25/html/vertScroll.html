@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #first{
+            position: absolute;
+            margin: auto;
+            top: 0;
+            left: 0;
+            width: 200px;
+            height: 300px;
+            overflow: hidden;
+            border: 50px solid crimson;
+        }
+        #but{
+            position: relative;
+            left: 20vw;
+                 }
+        #butDown{
+            position: relative;
+            left: 10vw;
+        }
+    </style>
+</head>
+<body>
+<div id="first">
+    <p>Some text to read</p>
+    <p>Some text to read</p>
+        <p>Some text to read</p>
+    <p>Some text to read</p>
+        <p>Some text to read</p>
+    <p>Some text to read</p>
+        <p>Some text to read</p>
+    <p>Some text to read</p>
+        <p>Some text to read</p>
+    <p>Some text to read</p>
+        <p>Some text to read</p>
+    <p>Some text to read</p>
+        <p>Some text to read</p>
+    <p>Some text to read 1</p>
+    <p>Some text to read 2</p>
+    <p>Some text to read 3</p>
+    <p>Some text to read 4</p>
+    <p>Some text to read 5</p>
+    <p>Some text to read 6</p>
+    <p>Some text to read 7</p>
+    <p> Finita</p>
+
+
+
+</div>
+<button id="but"> Scroll UP</button>
+<button id="butDown"> Scroll Down</button>
+<script>
+    var first=document.getElementById("first");
+ document.getElementById("but").onclick=function () {
+     first.scrollTop+=10;
+     var newOT=first.offsetTop+10;
+     first.style.top=newOT+"px";
+ }
+    document.getElementById("butDown").onclick=function () {
+        first.scrollTop-=10;
+        var newOT=first.offsetTop-10;
+        first.style.top=newOT+"px";
+    }
+</script>
+</body>
+</html>

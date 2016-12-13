@@ -1,0 +1,31 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+.select{
+    width: 100px;
+    height: 400px;
+    font-family: Arial;
+    font-size: 20px;
+
+}
+table, td{
+    border: 4px solid #e0ffff;
+    border-collapse: collapse;
+    padding: 10px;
+}
+.tblCont{
+    margin: auto;
+}
+.blue{
+    background-color: aquamarine;
+}
+.but{
+    padding: 20px;
+    font-size: 15px;
+    font-family: Arial;
+    background-color: lightcyan;
+    border: hidden;
+    color: blue;
+    border-radius: 10%;
+}

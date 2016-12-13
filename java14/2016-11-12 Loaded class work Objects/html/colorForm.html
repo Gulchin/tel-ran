@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="userForm.js"></script>
+</head>
+<body>
+<div class="block">
+    <span id="status"> dfg</span> <br>
+    Login: <input id="login" type="text"/>
+    Password: <input id="password" type="password"> <br>
+    Favorite color : <input id="fcolor" type="color" value="#0000ff">
+    <button id="signIn">Sign in!</button>
+    <button id="create">Create new user!</button>
+</div>
+<script>
+    var login=document.getElementById("login");
+    var password=document.getElementById("password");
+    var signIn=document.getElementById("signIn");
+    var create=document.getElementById("create");
+    var currentUser;
+    var defaultColor="#0000ff";
+    var fcolor=document.getElementById("fcolor");
+    var statusString=document.getElementById("status");
+
+    create.onclick=function () {
+        var user=new User(login.value,password.value,fcolor.value);
+        var res=createUser(user);
+        console.log(res);
+        if (res!="Invalid login or password" &&res!="User already exists") resetInputs();
+        statusString.innerText=res;
+    }
+
+    signIn.onclick=function () {
+        fcolor.value=defaultColor;
+        currentUser=loginUser(login.value,password.value);
+        if (currentUser!="login failed"){
+            fcolor.value=currentUser.get("fcolor");
+            resetInputs();
+            statusString.innerHTML=currentUser.toString();
+        }
+        else statusString.innerHTML="login failed";
+    }
+
+    function resetInputs() {
+        login.value="";
+        password.value="";
+    }
+
+</script>
+
+</body>
+</html>

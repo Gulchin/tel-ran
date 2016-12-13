@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery.min.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .nBar{
+            font-size: 0;
+            width: 100vw;
+            margin: auto;
+        }
+        .but{
+            width: 33.33333%;
+            background-color: #e1f5fc;
+            font-size: 30px;
+            padding: 10px;
+            border: hidden;
+            outline: none;
+        }
+        .sq{
+            position: absolute;
+            width: 100vw;
+            height: 80vh;
+            font-size: 30px;
+        }
+        .red{
+            background-color: #ff6261;
+
+        }
+        .green{
+            background-color: #85eaab;
+
+        }
+        .blue{
+            background-color: #7bb0ff;
+        }
+        .border{
+            border: 10px solid yellow;
+        }
+    </style>
+</head>
+<body>
+<div id="nBar" class="nBar">
+    <button class="but" myfield="r">Red </button>
+    <button class="but" myfield="b">Blue </button>
+    <button class="but" myfield="g">Green </button>
+</div>
+<div id="r" class="red sq"> Red page </div>
+<div id="b" class="blue sq"> Blue page</div>
+<div id="g" class="green sq">  Green Page</div>
+<script>
+    $(".sq").hide();
+    $("#r").show();
+    var curr=$("r");
+$("#nBar").on("click", function (e) {
+    var but=$(e.target);
+    var selected=$("#"+but.attr("myfield"));
+    if (selected!=curr){
+        curr.hide(2000);
+        selected.show(2000);
+        curr=selected;
+        $(".but").css("background-color",selected.css("background-color"));
+    }
+
+  //  $("#"+but.attr("myfield")).toggleClass("border");
+})
+</script>
+</body>
+</html>

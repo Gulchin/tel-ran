@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+        }
+        .but{
+            width: 15vw;
+            background-color: skyblue;
+            color: darkslateblue;
+            height: 10vh;
+            border: hidden;
+            outline: none;
+        }
+        #nb{
+         font-size: 0px;
+            width: 100vw;
+        }
+    </style>
+</head>
+<body>
+<div id="nb">
+    <button id="A" class="but a" cl="true">A</button><br>
+    <button id="B" class="but a" cl="true">B</button><br>
+    <button id="C" class="but">C</button><br>
+    <button id="D" class="but">D</button><br>
+    <button id="E" class="but">E</button><br>
+</div>
+<script>
+    document.getElementById("nb").onclick=function (e) {
+        var but=e.target;
+   //     if (but.tagName.toLowerCase()=="button")
+    //    if(but.getAttribute("cl"))
+        if(but.classList.contains("a"))
+        console.log(but.innerText);
+        //else console.log(but.tagName);
+    }
+</script>
+</body>
+</html>

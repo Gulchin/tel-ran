@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery.min.js"></script>
+    <style>
+        .sq{
+            width: 500px;
+            height: 500px;
+            background-color: cornflowerblue;
+        }
+    </style>
+</head>
+<body>
+<div id="first" class="sq"></div>
+<button id="push">Push</button>
+<script>
+    $("#push").on("click",function () {
+     //   $("#first").toggle(3000);
+      //  $("#first").slideToggle(3000);
+        $("#first").fadeToggle(3000);
+    })
+</script>
+</body>
+</html>

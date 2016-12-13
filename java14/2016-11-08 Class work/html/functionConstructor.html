@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function  Person(n,a,m) {
+        this.name=n;
+        this.age=a;
+        this.maried=m;
+
+    //    return 3;
+    }
+
+    var p=new Person("Vasya",28,false);
+    console.log(p);
+
+    var op="*";
+    var code="return a"+op+"b;";
+    var f= new Function ("a","b",code);
+    console.log(f(3,5));
+</script>
+
+</body>
+</html>

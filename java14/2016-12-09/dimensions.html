@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery.min.js"> </script>
+    <style>
+        .dim{
+            width: 150vw;
+            height: 100px;
+            border: 10px solid black;
+            padding: 50px;
+            margin: 25px;
+        }
+    </style>
+</head>
+<body>
+<div id="d" class="dim"></div>
+<script>
+    var dim=$("#d");
+    console.log(dim.width());
+    console.log(dim.innerWidth());
+    console.log(dim.outerWidth());
+    console.log(dim.outerWidth(true));
+    dim.width(500);
+</script>
+
+</body>
+</html>

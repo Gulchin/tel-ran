@@ -1,0 +1,61 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: Arial;
+    font-size: 2vmin;
+}
+table{
+    width: 100%;
+}
+table,td,th{
+    border: 1px solid deepskyblue;
+    border-collapse: collapse;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    text-align: center;
+}
+
+.container{
+    display: none;
+}
+.main{
+    position: absolute;
+    width: 50vw;
+    left: 25vw;
+    top: 5vh;
+}
+.place{
+    width: 100%;
+    border: 1px solid deepskyblue;
+    background-color: #d9f0fa;
+    margin: 0.5vmin;
+    padding: 1vmin;
+    border-radius: 0.25vmin;
+    text-align: center;
+}
+.but{
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    background-color: deepskyblue;
+    color: azure;
+}
+input{
+    border: 1px solid deepskyblue;
+    padding: 5px;
+}
+#func, #func td{
+    border: none;
+}
+#area{
+    padding: 1px;
+}
+#func td:first-child{
+    text-align: left;
+}
+textarea{
+    border: 1px solid deepskyblue;
+}

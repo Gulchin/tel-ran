@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<link>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery.min.js"></script>
+    <link rel="stylesheet" href="crossCurse.css" />
+</head>
+<body>
+<div id="cont" class="cont">
+<select multiple id="sel" class="select">
+</select><br>
+<button id="but" class="but">Make table </button>
+</div>
+<div id="tblCont" class="tblCont">
+    <button id="reset" class="but">Reset </button>
+</div>
+<script>
+    //Дз
+    var sel=$("#sel");
+    var rates={};
+    $.get("http://api.fixer.io/latest")
+        .then(function (res) {
+            console.log(res);
+            rates=res.rates;
+            makeSelect(res);
+            rates[res.base]=1;
+        })
+
+    function makeSelect(res) {
+        var op=$("<option></option>");
+        op.text(res.base);
+        sel.append(op);
+        for(var key in rates){
+            var op=$("<option></option>");
+            op.text(key);
+            sel.append(op);
+        }
+    }
+    
+    $("#but").on("click",function () {
+        $("#cont").fadeOut(500);
+        $("#tblCont").fadeIn(500);
+        makeTable(sel.val());
+    })
+    var tblCont=$("#tblCont");
+    $("#tblCont").fadeOut(500);
+    var tbl;
+    function makeTable(data) {
+        tbl=$("<table></table>");
+        tbl.attr("id","tbl");
+        var row=$("<tr></tr>");
+        var cell=$("<td></td>");
+        row.append(cell);
+        for(var i in data){
+            var cell=$("<td></td>");
+            cell.text(data[i]);
+            row.append(cell);
+        }
+        row.addClass("blue");
+        tbl.append(row);
+
+
+        for(var i in data){
+            var row=$("<tr></tr>");
+            var cell=$("<td></td>");
+            cell.text(data[i]);
+            cell.addClass("blue");
+            row.append(cell);
+            var rate1=rates[data[i]];
+            for(var j in data){
+                var cell=$("<td></td>");
+                var rate2=rates[data[j]];
+                cell.text(rate2/rate1);
+                row.append(cell);
+            }
+            tbl.append(row);
+        }
+        tblCont.prepend(tbl);
+    }
+    var b=$("#reset");
+    b.on("click",function () {
+        tbl.remove();
+   //     tblCont.remove("#tbl");
+//        tblCont.append(b);
+        $("#cont").fadeIn(500);
+        tblCont.fadeOut(500);
+    })
+
+</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+1. Извлеките ID курса, название курса и дату начала всех курсов, которые имеют статус ‘open’
+
+SELECT course_id,course_name,start_date FROM courses	 WHERE status='open';
+
+2. Создайте запрос, который выбирает все курсы, начатые в 2011 году.
+
+SELECT * FROM courses WHERE EXTRACT(YEAR FROM start_date)="2011";
+
+3. Добавьте в таблицу courses курс, который уже начался, но еще не окончен.
+
+insert INTO courses VALUE(7,"SQL basic","2016-10-21","2016-11-21",'open');
+
+4. Добавьте в таблицу students студента, который проживает не в России и не в Украине.
+
+INSERT INTO `students` (`person_id`, `first_name`, `last_name`, `gender`, `street`, `city`, `country`, `postal_code`) VALUES (12, 'Abram', 'Kats', 'M', 'Balfur', 'Bat-Yam', 'Israel', '45678');
+
+5. Создайте запись, которая позволит студенту, созданному в п.4, обучаться на курсе, созданном в п.3.
+
+INSERT INTO `students_course` (`person_id`, `course_id`) VALUES ('12', '7');

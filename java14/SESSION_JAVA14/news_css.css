@@ -1,0 +1,14 @@
+@import url(news_styles.css);
+body{
+    background-color: antiquewhite;
+}
+.news{
+    text-align: center;
+}
+.news h1{
+    font-family: 'Didact Gothic', sans-serif;
+    color: cornflowerblue;
+    border: 6px double cornflowerblue;
+    padding: 10px 50px;
+    display: inline-block;
+}

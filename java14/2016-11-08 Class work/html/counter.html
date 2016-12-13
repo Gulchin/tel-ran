@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var counter=888;
+    function Counter() {
+        var counter=0;
+        var inc=function () {
+            counter++;
+        }
+        var sh=function () {
+            console.log(counter)
+        }
+        return {
+            increment :inc,
+            show: sh
+        }
+    }
+    var c=Counter();
+    console.log(c);
+    c.increment();
+    c.increment();
+    c.show();
+    console.log(counter);
+    var c1=Counter();
+    c1.show();
+    console.log(c.increment);
+</script>
+</body>
+</html>

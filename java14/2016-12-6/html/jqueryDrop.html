@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery.min.js"></script>
+</head>
+<body>
+<script>
+    var d=$("<select></select>");
+    var names=["David","Shlomo","Yosef","Rahel","Sarah"];
+    $("body").append(d);
+    for(var i=0;i<names.length;i++){
+        var op=$("<option></option>");
+        op.text(names[i]);
+        d.append(op);
+    }
+</script>
+
+</body>
+</html>

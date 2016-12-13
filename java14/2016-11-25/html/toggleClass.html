@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .sq{
+            positin: absolute;
+            top: 200px;
+            left: 200px;
+            width: 25vw;
+            height: 25vw;
+            border: 1px solid darkblue;
+        }
+        .round{
+            border-radius: 200px;
+        }
+        .green{
+            background-color: darkgreen;
+        }
+    </style>
+</head>
+<body>
+<div class="sq" id="first">
+</div>
+<button id="but">Push </button>
+<script>
+        console.log("* "+document.getElementById("first").style.width);
+        console.log("& "+getComputedStyle(document.getElementById("first")).width);
+        document.getElementById("but").onclick=function () {
+        document.getElementById("first").classList.toggle("round");
+        document.getElementById("first").classList.toggle("green");
+        console.log(document.getElementById("first").classList);
+
+    }
+</script>
+</body>
+</html>

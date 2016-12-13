@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var arr=[2,-8,9,11,-14,8,3,-7,15,8];
+    console.log(arr);
+
+    console.log(arr.filter(function (x) {
+        var sum=0;
+        var divider=10;
+        var num=Math.abs(x);
+        while (num>=1){
+            var ramaining=num%divider;
+            sum+=ramaining;
+            num=(num-ramaining)/divider;
+        }
+        console.log("***" +sum+"***** of:"+ x);
+        return sum<5;
+
+    }))
+//    delete arr[3];
+//    console.log(arr);
+//    arr[3]=66;
+//    console.log(arr);
+//    arr[100500]=777;
+//    console.log(arr);
+//    arr[-7]=111;
+//    arr[-8]=111;
+//    arr[100]=55;
+//    arr[11]="Number";
+//    console.log(arr);
+//    delete arr[100500];
+//    delete arr[-8];
+//    delete arr[-7];
+//    console.log(arr);
+//    arr[2.5]="5.5";
+//    arr["Sasha"]="Masha"
+//    console.log(arr);
+//    var arr2=arr.slice(0);
+//    console.log(arr2);
+//    var arr3=arr.concat([]);
+//    console.log(arr3);
+//
+//    for (var key in arr) console.log(key+" -> "+arr[key]);
+//    arr[0]=0;
+//    arr.push(22);
+//    console.log(arr);
+//    console.log(arr.pop());
+//    console.log(arr);
+//    arr.unshift(43);
+//    console.log(arr);
+//    console.log(arr.shift());
+//    console.log(arr);
+//   // arr.splice(3,3,888);
+//   // console.log(arr);
+//    var arr1= arr.slice(3);
+//    console.log(arr1);
+//    console.log(arr.join(":"));
+</script>
+</body>
+</html>
