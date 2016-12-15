@@ -25,7 +25,7 @@ public class AvlTreeSetIterator<E> implements Iterator<E> {
 	public E next() {
 		if (!hasNext()) throw new NoSuchElementException();
 		E res=current.data;
-		System.out.println("balanse :"+current.balance);
+		//System.out.println("balanse :"+current.balance);
 		current=current.next();
 		return res;
 	}

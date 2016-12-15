@@ -1,12 +1,15 @@
 package net.okhotnikov.lists.treeset;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.NavigableSet;
+import java.util.NoSuchElementException;
 import java.util.SortedSet;
 
 public class AvlTreeSet<E> implements NavigableSet<E> {
@@ -74,14 +77,28 @@ public class AvlTreeSet<E> implements NavigableSet<E> {
 
 	@Override
 	public Object[] toArray() {
-		// TODO Auto-generated method stub
-		return null;
+		Object [] res=new Object[size];
+		int i=0;
+		for (E e: this) res[i++]=e;
+		return res;
 	}
 
 	@Override
 	public <T> T[] toArray(T[] a) {
-		// TODO Auto-generated method stub
-		return null;
+		if (a==null || a.length==0) throw new IllegalArgumentException();
+		if (size==0) return (T[]) Array.newInstance(a[0].getClass(), 0);
+		if (a.length>=size){
+			return toArr(a);
+		}		
+		T[] ts = (T[]) Array.newInstance(a[0].getClass(), size);
+		return toArr(ts);
+	}
+	
+	private <T> T[] toArr(T[] b) {
+		int i=0;
+		for (E e: this) b[i++]=(T) e;
+		return b;
+		
 	}
 
 	@Override
@@ -97,7 +114,8 @@ public class AvlTreeSet<E> implements NavigableSet<E> {
 	public boolean remove(Object o) {
 		TreeNode node=find((E)o);
 		if (node==null)return false;
-		node.remove();	
+		node.remove();
+		size--;
 		return true;
 	}
 
@@ -111,20 +129,36 @@ public class AvlTreeSet<E> implements NavigableSet<E> {
 
 	@Override
 	public boolean addAll(Collection<? extends E> c) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean wasAdded=false;
+		for(E e:c){
+			if (add(e)) {
+				wasAdded=true;
+				size++;
+			}
+		}
+		return wasAdded;
 	}
-
+	//I know this is not optimal performance :(
 	@Override
 	public boolean retainAll(Collection<?> c) {
-		// TODO Auto-generated method stub
-		return false;
+		NodeIterator it =new NodeIterator(firstNode());
+		HashSet<TreeNode> set=new HashSet();
+		while(it.hasNext()){
+			TreeNode node=it.next();
+			if(c.contains(node.data)){
+				set.add(node);			
+			}
+		}
+		return removeAll(set);
 	}
 
 	@Override
 	public boolean removeAll(Collection<?> c) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean wasRemoved=false;
+		for (Object o:c){
+			if(remove(o)) wasRemoved=true;
+		}
+		return wasRemoved;
 	}
 
 	@Override
@@ -134,8 +168,21 @@ public class AvlTreeSet<E> implements NavigableSet<E> {
 
 	@Override
 	public E lower(E e) {
-		// TODO Auto-generated method stub
-		return null;
+		Iterator<E> it=iterator();
+		if (!it.hasNext()) return null;
+		E setElement=it.next();
+		int compareRes=compare(e, setElement);
+		if (compareRes==0)return setElement;
+		if (compareRes<0) return null;
+		E lastE=setElement;
+		while(it.hasNext()){
+			setElement=it.next();
+			compareRes=compare(e, setElement);
+			if (compareRes==0)return setElement;
+			if (compareRes<0) return lastE;
+			lastE=setElement;
+		}		
+		return setElement;
 	}
 
 	@Override
@@ -367,7 +414,6 @@ public class AvlTreeSet<E> implements NavigableSet<E> {
 						}
 				}												
 			}
-		//	fixBalance();
 		}
 		
 		void makeRoot(){
@@ -474,6 +520,32 @@ public class AvlTreeSet<E> implements NavigableSet<E> {
 		}
 		
 	}
+	 
+	 
+	 class NodeIterator implements Iterator<TreeNode> {
+		 
+		TreeNode current;
+		 
+
+		public NodeIterator(AvlTreeSet<E>.TreeNode current) {
+			super();
+			this.current = current;
+		}
+
+		@Override
+		public boolean hasNext() {
+			return !current.isEmpty();
+		}
+
+		@Override
+		public AvlTreeSet<E>.TreeNode next() {
+			if (!hasNext()) throw new NoSuchElementException();
+			TreeNode res=current;
+			current=current.next();
+			return res;
+		}
+		 
+	 }
 	 
 	 class Branch{
 		 TreeNode root;
