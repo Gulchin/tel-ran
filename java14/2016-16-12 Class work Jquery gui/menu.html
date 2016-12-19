@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery.min.js"></script>
+    <script src="jquery-ui.js"></script>
+    <link href="jquery-ui.css" rel="stylesheet" />
+    <style>
+        .m{
+            width: 30vw;
+        }
+        .m li{
+            font-family: Arial;
+            font-size: 3vh;
+            padding: 1vh;
+            width: 25vw;
+        }
+        .m li div:hover{
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+<body>
+<ul id="menu" class="m">
+    <li><div>Salads</div>
+        <ul>
+        <li> <div>Shuba</div></li>
+        <li> <div>Cesar</div></li>
+        <li> <div>Olivye</div></li>
+        </ul>
+    </li>
+<li><div>Soups</div>
+        <ul>
+        <li> <div>Borsh</div></li>
+        <li> <div>Stshi</div></li>
+        <li> <div>Miso</div></li>
+        </ul>
+    </li>
+<li><div>Meals</div>
+        <ul>
+        <li> <div>Meat</div></li>
+        <li> <div>Fish</div></li>
+        <li> <div>Vegetables</div></li>
+        </ul>
+    </li>
+<li><div>Deserts</div>
+        <ul>
+        <li> <div>Drinks</div>
+            <ul>
+                <li><div>Wine</div></li>
+                <li><div>Water</div></li>
+                <li><div>Vodka</div></li>
+            </ul>
+        </li>
+
+        <li> <div>Cakes</div></li>
+        <li> <div>Froorts</div></li>
+        </ul>
+    </li>
+
+</ul>
+<script>
+    $("#menu").menu();
+</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery.min.js"></script>
+    <script src="jquery-ui.js"></script>
+    <link href="jquery-ui.css" rel="stylesheet" />
+    <style>
+        .b{
+            position: absolute;
+            top: 200px;
+            left: 400px;
+            width: 300px;
+            height: 300px;
+            border-radius: 150px;
+            background-color: #007fff;
+        }
+    </style>
+</head>
+<body>
+<div id="first" class="b"></div>
+<script>
+    var f=$("#first");
+    var options={};
+//    options.horizFirst=true;
+//    options.size=100;
+//    options.pieces=100;
+    options.color="#ff0055";
+    f.on("click",function () {
+        f.toggle("highlight",options,2000);
+    })
+</script>
+</body>
+</html>

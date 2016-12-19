@@ -11,16 +11,15 @@ import java.util.List;
 import java.util.NavigableSet;
 import java.util.NoSuchElementException;
 import java.util.SortedSet;
+import java.util.function.Predicate;
 
 public class AvlTreeSet<E> implements NavigableSet<E> {
 	
-	private Comparator<? super E> comporator;
-	private TreeNode root;
-	private int size;
-	private int height=0;
-	private int nodeHeight=0;
+	protected Comparator<? super E> comporator;
+	protected TreeNode root;
+	protected int size;
 	private LinkedHashMap<Integer,List<TreeNode>> map=new LinkedHashMap();
-
+	AvlTreeSet<E> parent;	
 	
 	public AvlTreeSet(Comparator<? super E> comporator) {
 		super();
@@ -28,7 +27,20 @@ public class AvlTreeSet<E> implements NavigableSet<E> {
 		root=new TreeNode(null);
 		size=0;
 	}
+	
+	private AvlTreeSet(){
+		
+	}
 
+	boolean isView(){
+		return parent!=null;
+	}
+	
+	void shiftSize(int deltaSize){
+		size+=deltaSize;
+		if(isView()) parent.shiftSize(deltaSize);
+	}
+	
 	@Override
 	public Comparator<? super E> comparator() {
 		return comporator;
@@ -51,7 +63,8 @@ public class AvlTreeSet<E> implements NavigableSet<E> {
 
 	@Override
 	public boolean isEmpty() {
-		return root.isEmpty();
+		Iterator<E> it=iterator();
+		return !it.hasNext();
 	}
 
 	@Override
@@ -64,7 +77,7 @@ public class AvlTreeSet<E> implements NavigableSet<E> {
 		int compareRes=root.compareData(e);
 		if (compareRes==0) return root;
 		Branch branch=new Branch(root,compareRes>0);
-		Brancherator it=new Brancherator(branch,e);
+		SearchIterator it=new SearchIterator(branch,e);
 		while(it.hasNext()){
 			branch=it.next();
 			TreeNode res=branch.containNode(e);
@@ -104,8 +117,7 @@ public class AvlTreeSet<E> implements NavigableSet<E> {
 	@Override
 	public boolean add(E e) {
 		if (contains(e)) return false;
-		size++;
-		nodeHeight=0;
+		shiftSize(1);
 		 root.add(e);
 		 return true;
 	}
@@ -115,7 +127,7 @@ public class AvlTreeSet<E> implements NavigableSet<E> {
 		TreeNode node=find((E)o);
 		if (node==null)return false;
 		node.remove();
-		size--;
+		shiftSize(-1);
 		return true;
 	}
 
@@ -133,7 +145,7 @@ public class AvlTreeSet<E> implements NavigableSet<E> {
 		for(E e:c){
 			if (add(e)) {
 				wasAdded=true;
-				size++;
+				shiftSize(1);
 			}
 		}
 		return wasAdded;
@@ -161,13 +173,44 @@ public class AvlTreeSet<E> implements NavigableSet<E> {
 		return wasRemoved;
 	}
 
+	void sizeToZero(){
+		size=0;
+		if(isView()) parent.sizeToZero();
+	}
 	@Override
 	public void clear() {
-		root=new TreeNode(null);		
+		root.data=null;
+		root.left=new TreeNode(root);
+		root.right=new TreeNode(root);
+		sizeToZero();		
+		root.balance=0;
+		if(root.parent!=null){
+			root.parent.recountBalance();
+			root.parent.fixBalance();
+		}
 	}
 
 	@Override
 	public E lower(E e) {
+		Iterator<E> it=iterator();
+		if (!it.hasNext()) return null;
+		E setElement=it.next();
+		int compareRes=compare(e, setElement);
+	
+		if (compareRes<=0) return null;
+		E lastE=setElement;
+		while(it.hasNext()){
+			setElement=it.next();
+			compareRes=compare(e, setElement);
+
+			if (compareRes<=0) return lastE;
+			lastE=setElement;
+		}		
+		return setElement;
+	}
+
+	@Override
+	public E floor(E e) {
 		Iterator<E> it=iterator();
 		if (!it.hasNext()) return null;
 		E setElement=it.next();
@@ -186,36 +229,61 @@ public class AvlTreeSet<E> implements NavigableSet<E> {
 	}
 
 	@Override
-	public E floor(E e) {
-		if (root.isEmpty()) return null;
-
-		TreeNode current=root;
-		
-		return null;
-	}
-
-	@Override
 	public E ceiling(E e) {
-		// TODO Auto-generated method stub
-		return null;
+		Iterator<E> it=descendingIterator();
+		if (!it.hasNext()) return null;
+		E setElement=it.next();
+		int compareRes=compare(e, setElement);
+		if (compareRes==0)return setElement;
+		if (compareRes>0) return null;
+		E lastE=setElement;
+		while(it.hasNext()){
+			setElement=it.next();
+			compareRes=compare(e, setElement);
+			if (compareRes==0)return setElement;
+			if (compareRes>0) return lastE;
+			lastE=setElement;
+		}		
+		return setElement;
 	}
 
 	@Override
 	public E higher(E e) {
-		// TODO Auto-generated method stub
-		return null;
+		Iterator<E> it=descendingIterator();
+		if (!it.hasNext()) return null;
+		E setElement=it.next();
+		int compareRes=compare(e, setElement);
+	
+		if (compareRes>=0) return null;
+		E lastE=setElement;
+		while(it.hasNext()){
+			setElement=it.next();
+			compareRes=compare(e, setElement);
+
+			if (compareRes>=0) return lastE;
+			lastE=setElement;
+		}		
+		return setElement;
 	}
 
 	@Override
 	public E pollFirst() {
-		// TODO Auto-generated method stub
-		return null;
+		TreeNode first=firstNode();
+		if (first.isEmpty()) return null;
+		E res=first.data;
+		first.remove();
+		shiftSize(-1);
+		return res;
 	}
 
 	@Override
 	public E pollLast() {
-		// TODO Auto-generated method stub
-		return null;
+		TreeNode last=lastNode();
+		if (last.isEmpty()) return null;
+		E res=last.data;
+		last.remove();
+		shiftSize(-1);
+		return res;
 	}
 
 	@Override
@@ -225,53 +293,72 @@ public class AvlTreeSet<E> implements NavigableSet<E> {
 
 	@Override
 	public NavigableSet<E> descendingSet() {
-		// TODO Auto-generated method stub
-		return null;
+		AvlTreeSet<E> res=new DescendingTree<>();
+		initChild(res);
+		return res;
+	}
+	
+	private void initChild(AvlTreeSet<E> set){
+		set.root=root;
+		set.comporator=comporator;
+		set.size=size;
+		set.parent=this;
 	}
 
 	@Override
 	public Iterator<E> descendingIterator() {
-		// TODO Auto-generated method stub
-		return null;
+		return new AvlTreeSetDescendingIterator<E>(this);
 	}
 
 	@Override
 	public NavigableSet<E> subSet(E fromElement, boolean fromInclusive, E toElement, boolean toInclusive) {
-		// TODO Auto-generated method stub
-		return null;
+		SubTree tree=new SubTree(comporator, fromElement,fromInclusive, toElement,toInclusive);
+		initChild(tree);
+		tree.recountSize();
+		return tree;
 	}
 
 	@Override
 	public NavigableSet<E> headSet(E toElement, boolean inclusive) {
-		// TODO Auto-generated method stub
-		return null;
+		SubTree tree=new SubTree(comporator, null,false, toElement,inclusive);
+		initChild(tree);
+		tree.recountSize();
+		return tree;
 	}
 
 	@Override
 	public NavigableSet<E> tailSet(E fromElement, boolean inclusive) {
-		// TODO Auto-generated method stub
-		return null;
+		SubTree tree=new SubTree(comporator, fromElement,inclusive, null,false);
+		initChild(tree);
+		tree.recountSize();
+		return tree;
 	}
 
 	@Override
 	public SortedSet<E> subSet(E fromElement, E toElement) {
-		// TODO Auto-generated method stub
-		return null;
+		SubTree tree=new SubTree(comporator, fromElement, toElement);
+		initChild(tree);
+		tree.recountSize();
+		return tree;
 	}
 
 	@Override
 	public SortedSet<E> headSet(E toElement) {
-		// TODO Auto-generated method stub
-		return null;
+		SubTree tree=new SubTree(comporator, null, toElement);
+		initChild(tree);
+		tree.recountSize();
+		return tree;
 	}
 
 	@Override
 	public SortedSet<E> tailSet(E fromElement) {
-		// TODO Auto-generated method stub
-		return null;
+		SubTree tree=new SubTree(comporator, fromElement, null);
+		initChild(tree);
+		tree.recountSize();
+		return tree;
 	}
 	
-	private int compare(E e1, E e2){
+	int compare(E e1, E e2){
 		if (comporator!=null) return comporator.compare(e1, e2);
 		Comparable<E> c1=(Comparable<E>)e1;
 		return c1.compareTo(e2);
@@ -315,6 +402,8 @@ public class AvlTreeSet<E> implements NavigableSet<E> {
 		E data;
 		TreeNode parent,left,right;
 		byte balance;
+		boolean isFirst=false;
+		boolean isLast=false;
 		public TreeNode(TreeNode parent) {
 			this.parent=parent;
 			balance=-1;
@@ -446,17 +535,24 @@ public class AvlTreeSet<E> implements NavigableSet<E> {
 			return right.last();
 		}
 		
+		
 		TreeNode next(){
-			if(parent==null) return right.first();
+			if(isRoot()) return right.first();
 			if (!right.isEmpty()) return right.first();
 			if(parent.left==this)  return parent;
+			if(parent.isRoot()) if( left.isEmpty()) return right;
+			else return first();
+			if(!parent.parent.isRightChild(parent)) return parent.parent;
 			return right;
 		}	
 		
-		TreeNode previous(){
-			if(parent==null) return left.last();
+		TreeNode previous(){				
+			if(isRoot()) return left.last();
 			if (!left.isEmpty()) return left.last();
 			if(parent.right==this)  return parent;
+			if(parent.isRoot()) if(right.isEmpty()) return left;
+			else return last();
+			if(parent.parent.isRightChild(parent)) return parent.parent;
 			return left;
 		}
 		
@@ -480,7 +576,8 @@ public class AvlTreeSet<E> implements NavigableSet<E> {
 		}
 		
 		boolean isRoot(){
-			return parent==null;
+			//return parent==null;
+			return this==AvlTreeSet.this.root;
 		}
 		
 		boolean isLeave(){
@@ -497,6 +594,7 @@ public class AvlTreeSet<E> implements NavigableSet<E> {
 				TreeNode myLeft=left;
 				parent=left;
 				left=myLeft.right;
+				left.parent=this;
 				myLeft.right=this;
 				myLeft.parent=myParent;
 				this.recountBalance();
@@ -508,6 +606,7 @@ public class AvlTreeSet<E> implements NavigableSet<E> {
 				TreeNode myRight=right;
 				parent=right;
 				right=myRight.left;
+				right.parent=this;
 				myRight.left=this;
 				myRight.parent=myParent;
 				this.recountBalance();
@@ -526,7 +625,6 @@ public class AvlTreeSet<E> implements NavigableSet<E> {
 		 
 		TreeNode current;
 		 
-
 		public NodeIterator(AvlTreeSet<E>.TreeNode current) {
 			super();
 			this.current = current;
@@ -542,6 +640,31 @@ public class AvlTreeSet<E> implements NavigableSet<E> {
 			if (!hasNext()) throw new NoSuchElementException();
 			TreeNode res=current;
 			current=current.next();
+			return res;
+		}
+		 
+	 }
+	 
+	 class DescendingNodeIterator implements Iterator<TreeNode> {
+		 
+		TreeNode current;
+		 
+
+		public DescendingNodeIterator(AvlTreeSet<E>.TreeNode current) {
+			super();
+			this.current = current;
+		}
+
+		@Override
+		public boolean hasNext() {
+			return !current.isEmpty();
+		}
+
+		@Override
+		public AvlTreeSet<E>.TreeNode next() {
+			if (!hasNext()) throw new NoSuchElementException();
+			TreeNode res=current;
+			current=current.previous();
 			return res;
 		}
 		 
@@ -590,12 +713,12 @@ public class AvlTreeSet<E> implements NavigableSet<E> {
 		 
 	 }
 	 
-	 class Brancherator implements Iterator<Branch>{
+	 class SearchIterator implements Iterator<Branch>{
 		 Branch current;
 		 private E value;
 		 
 
-		public Brancherator(AvlTreeSet<E>.Branch current, E value) {
+		public SearchIterator(AvlTreeSet<E>.Branch current, E value) {
 			super();
 			this.current = current;
 			this.value = value;
@@ -631,5 +754,167 @@ public class AvlTreeSet<E> implements NavigableSet<E> {
 		}
 		 
 	 }
+	 
+	 class DescendingTree<T> extends AvlTreeSet<T>{
+			 
+		@Override
+		public T first() {
+			return super.last();
+		}
+
+		@Override
+		public T last() {
+			return super.first();
+		}
+
+		@Override
+		public Iterator<T> iterator() {
+			return super.descendingIterator();
+			
+		}
+
+		@Override
+		public Iterator<T> descendingIterator() {
+			return super.iterator();
+		}		 		 
+	 }
+	 
+	 class SubTree extends AvlTreeSet<E>{
+		 E fromElement=null;
+		 boolean fromInclusive=false;
+		 E toElement=null;
+		 boolean toInclusive=false;
+		 SubTreePredicate predicate=new SubTreePredicate(this);
+		 
+		public SubTree(Comparator<? super E> comporator, E fromElement, boolean fromInclusive, E toElement,
+				boolean toInclusive) {
+			super(comporator);
+			this.fromElement = fromElement;
+			this.fromInclusive = fromInclusive;
+			this.toElement = toElement;
+			this.toInclusive = toInclusive;
+		}
+
+		public SubTree(Comparator<? super E> comporator, E fromElement, E toElement) {
+			super(comporator);
+			this.fromElement = fromElement;
+			this.toElement = toElement;
+		}
+
+			void recountSize(){
+			Iterator<E> it=iterator();
+			size=0;
+			while(it.hasNext()){
+				it.next();
+				size++;
+			}
+		}
+		@Override
+		public Iterator<E> iterator() {
+			return new FilteredIterator<>(super.iterator(),predicate);
+		}
+
+		@Override
+		public Iterator<E> descendingIterator() {
+			return new FilteredIterator<>(super.descendingIterator(),predicate);
+		}
+
+		@Override
+		public E first() {
+			Iterator<E> it=iterator();
+			if(!it.hasNext()) return null;
+			return it.next();
+		}
+
+		@Override
+		public E last() {
+			Iterator<E> it=descendingIterator();
+			if(!it.hasNext()) return null;
+			return it.next();
+		}
+
+		@Override
+		AvlTreeSet<E>.TreeNode find(E e) {
+			TreeNode found=super.find(e);
+			return predicate.test(found.data) ? found : null;
+		}
+
+		@Override
+		AvlTreeSet<E>.TreeNode firstNode() {
+			TreeNode res=super.firstNode();
+			do{
+				if (predicate.test(res.data)) return res;
+				res=res.next();
+			} while(!res.isEmpty());
+			return null;
+		}
+
+		@Override
+		AvlTreeSet<E>.TreeNode lastNode() {
+			TreeNode res=super.lastNode();
+			do{
+				if (predicate.test(res.data)) return res;
+				res=res.previous();
+			} while(!res.isEmpty());
+			return null;
+		}
+
+		@Override
+		public void clear() {
+			Iterator<TreeNode> it=new FilteredIterator<>(new NodeIterator(firstNode()),
+					new SubTreeNodePredicate(predicate));
+			while(it.hasNext()){
+				TreeNode node=it.next();
+				node.remove();
+				shiftSize(-1);
+			}
+		}
+										 
+		
+		 
+	 }
+	 
+	 class SubTreePredicate implements Predicate<E>{
+		 SubTree tree;
+
+		public SubTreePredicate(AvlTreeSet<E>.SubTree subTree) {
+			super();
+			this.tree = subTree;
+		}
+
+		@Override
+		public boolean test(E t) {
+			boolean isUnderTop=false;
+			boolean isAboveBottom=false;
+			if(tree.toElement!=null)
+				isUnderTop=tree.toInclusive ? (tree.compare(t, tree.toElement)<=0) :
+				(tree.compare(t, tree.toElement)<0);
+			if(tree.fromElement!=null)	
+			isAboveBottom=tree.fromInclusive ? (tree.compare(t, tree.fromElement)>=0) :
+				(tree.compare(t, tree.fromElement)>0);
+			if(tree.fromElement==null) 
+				return (tree.toElement==null) ? true : isUnderTop;
+			return (tree.toElement==null) ? isAboveBottom : isUnderTop&&isAboveBottom;				
+		}
+		 
+	 }
+	 
+	 class SubTreeNodePredicate implements Predicate<TreeNode>{
+		 SubTreePredicate subTreePredicate;
+		 
+
+		public SubTreeNodePredicate(AvlTreeSet<E>.SubTreePredicate subTreePredicate) {
+			super();
+			this.subTreePredicate = subTreePredicate;
+		}
+
+
+		@Override
+		public boolean test(AvlTreeSet<E>.TreeNode t) {
+			return subTreePredicate.test(t.data);
+		}
+		 
+	 }
+	 	 
 
 }

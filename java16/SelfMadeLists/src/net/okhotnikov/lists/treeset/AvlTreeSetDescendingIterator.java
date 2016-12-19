@@ -3,17 +3,16 @@ package net.okhotnikov.lists.treeset;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import net.okhotnikov.lists.treeset.AvlTreeSet.TreeNode;
-
-public class AvlTreeSetIterator<E> implements Iterator<E> {
-	 AvlTreeSet<E> set;
-	 AvlTreeSet<E>.TreeNode current;
+public class AvlTreeSetDescendingIterator<E> implements Iterator<E> {
+	AvlTreeSet<E> set;
+	AvlTreeSet<E>.TreeNode current;
+	
 	
 
-	public AvlTreeSetIterator(AvlTreeSet<E> set) {
+	public AvlTreeSetDescendingIterator(AvlTreeSet<E> set) {
 		super();
 		this.set = set;
-		current=set.firstNode();
+		current=set.lastNode();
 	}
 
 	@Override
@@ -25,8 +24,7 @@ public class AvlTreeSetIterator<E> implements Iterator<E> {
 	public E next() {
 		if (!hasNext()) throw new NoSuchElementException();
 		E res=current.data;
-		//System.out.println("balanse :"+current.balance);
-		current=current.next();
+		current=current.previous();
 		return res;
 	}
 

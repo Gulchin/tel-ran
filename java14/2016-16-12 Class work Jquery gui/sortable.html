@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery.min.js"></script>
+    <script src="jquery-ui.js"></script>
+    <link href="jquery-ui.css" rel="stylesheet" />
+    <style>
+        .u{
+            position: absolute;
+            left: 50px;
+            top: 50px;
+        }
+        li{
+            list-style-type: none;
+            width: 20vw;
+            height: 5vh;
+            font-family: Arial;
+            font-size: 3vh;
+            background: linear-gradient(#ffffff, #e1f5fc, #ffffff);
+        }
+    </style>
+</head>
+<body>
+<ul id="cities" class="u">
+        <li>Bat-Yam</li>
+        <li>Tel-Aviv</li>
+        <li>Rehovot</li>
+        <li>Holon</li>
+        <li>Yerusalim</li>
+        <li>Rishon</li>
+        <li>Haifa</li>
+        <li>Netanya</li>
+</ul>
+<script>
+    $("#cities").sortable();
+</script>
+</body>
+</html>

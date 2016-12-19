@@ -1,6 +1,12 @@
 import java.util.*;
 import java.util.Map.Entry;
 
+//ДЗ Энтии Пикче: url string, tags [] string; equals по url конструктор, геттер, ту стинг
+// Клас дао с двумя мэпами один по url <String,Picture>
+// Второй мэп с ключом таг, а значением список картин с этим тагом <String, List<Picture>>
+//similarityPercent int - процент при котором картинки счтиаются похожими (например, при 50%)картинки похожи
+//Две функции add - добавить картину. 
+// getSimilarPictures - берет массив тагов и дает картинки у которых есть достаточный процент этих тагов.
 public class RepeatedStringCountApp {
 	private static final String [] STRINGS={"aaaa","aaaa","aaaa","zz","zz","bb","bb","bb","you!"};
 

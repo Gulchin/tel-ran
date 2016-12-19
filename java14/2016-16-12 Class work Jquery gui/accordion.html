@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery.min.js"></script>
+    <script src="jquery-ui.js"></script>
+    <link href="jquery-ui.css" rel="stylesheet" />
+    <style>
+        @font-face {
+            font-family: myFirstFont;
+            src: url("SCRIPTIN.ttf");
+        }
+        body{
+            margin: 0vw;
+            width: 100vw;
+            height: 90vh;
+
+        }
+    .red
+    {
+        background-color: red;
+    }
+    .blue
+    {
+        background-color: #007fff;
+    }
+    .green
+    {
+        background-color: green;
+    }
+    .yellow
+    {
+        background-color: gold;
+    }
+        .page{
+            width: 100vw;
+            height: 60vh;
+            font-size: 10vh;
+            font-family: myFirstFont;
+            outline: none;
+        }
+        .header{
+            font-size: 5vh;
+            width: 100vw;
+        }
+    </style>
+</head>
+<body>
+<div id="acc">
+    <p class="header red" id="r">Red page</p>
+    <div class="page red">RED PAGE</div>
+    <p class="header green" id="g">Green page</p>
+    <div class="page green">BLUE PAGE</div>
+    <p class="header blue" id="b">Blue page</p>
+    <div class="page blue">BLUE PAGE</div>
+    <p class="header yellow " id="y">Yellow page</p>
+    <div class="page yellow">YELLOW PAGE</div>
+</div>
+<script>
+    var options={};
+    options.collapsible=true;
+ //   options.active=2;
+    options.active=false;
+    $("#acc").accordion(options);
+</script>
+</body>
+</html>
