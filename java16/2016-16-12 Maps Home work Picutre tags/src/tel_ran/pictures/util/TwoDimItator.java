@@ -12,7 +12,6 @@ public class TwoDimItator<T> implements Iterator<T> {
 		if(outterIterator.hasNext())
 			innerIterator=outterIterator.next().iterator();
 		else isEmpty=true;
-	//	outterIterator=itarable.getOutterIterator();
 	}
 
 	@Override

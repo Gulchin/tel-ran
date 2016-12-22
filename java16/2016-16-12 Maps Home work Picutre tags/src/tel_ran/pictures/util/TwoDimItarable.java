@@ -9,12 +9,6 @@ public class TwoDimItarable<T> implements Iterable<T> {
 		return itarable.iterator();
 	}	
 	
-//	public Iterator<T>  getInnerIterator(){
-//		Iterator<Iterable<T>> outerIterator=getOutterIterator();
-//		if (!outerIterator.hasNext()) return null;
-//		return outerIterator.next().iterator();
-//	}
-	
 	public TwoDimItarable(Iterable<Iterable<T>> itarable) {
 		super();
 		this.itarable = itarable;
