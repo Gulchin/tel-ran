@@ -42,7 +42,14 @@ public class PersonMapTest {
 		}
 		
 	}
-
+	
+	@Test
+	public void iteratorTest(){
+		for(Person person:map){
+			System.out.println(person);
+		}
+	}
+	
 	@Test
 	public void testRemove() {
 		for(Person person: personArray){

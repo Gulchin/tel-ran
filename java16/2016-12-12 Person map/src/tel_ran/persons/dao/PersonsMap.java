@@ -5,6 +5,10 @@ import java.util.*;
 import tel_ran.persons.repository.PersonRepository;
 
 public class PersonsMap implements PersonRepository {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	Map<Integer,Person> persons=new HashMap<>();
 	Map<String,List<Person>> personsNames= new HashMap<>();
 	TreeMap<Integer,List<Person>> personsYears=new TreeMap<>();
@@ -76,6 +80,11 @@ public class PersonsMap implements PersonRepository {
 	@Override
 	public Person get(int id) {
 		return persons.get(id);
+	}
+
+	@Override
+	public Iterator<Person> iterator() {
+		return persons.values().iterator();
 	}
 
 }

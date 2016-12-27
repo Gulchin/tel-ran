@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="angular.js"></script>
+    <script src="opa.js"></script>
+    <style>
+        *{
+            margin: 0;
+        }
+        body{
+            width: 100vw;
+            height: 100vh;
+        }
+        .but{
+            outline: none;
+            border: hidden;
+            font-size: 3vh;
+            padding: 1vh;
+            border-top-left-radius: 2vh;
+            border-top-right-radius: 2vh;
+            width: 33.33333%;
+        }
+        .r{
+            background-color: lightcoral;
+            color: darkred;
+        }
+        .g{
+            background-color: lightgreen;
+            color: darkgreen;
+        }
+        .b{
+            background-color: lightskyblue;
+            color: darkblue;
+        }
+        .navBar{
+            font-size: 0;
+            width: 100vw;
+            height: 6vh;
+        }
+        .page{
+            margin: 0px;
+            position: absolute;
+            top: 5.5vh;
+            width: 100vw;
+            height: 94vh;
+            font-size: 6vh;
+            text-align: center;
+        }
+    </style>
+</head>
+<body ng-app="opa" ng-controller="opaCntr">
+<div class="navBar">
+<button class="but r" ng-click="show('red')">Red</button>
+<button class="but g" ng-click="show('green')">Green</button>
+<button class="but b" ng-click="show('blue')">Blue</button>
+</div>
+<div ng-include="page"></div>
+</body>
+</html>

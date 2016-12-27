@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var father={
+        value: 3,
+        arr: [3,7,11],
+        obj:{
+            name: "sasha",
+            age: 58
+        },
+        arrObj:[
+            {
+                country:"France",
+                capital:"Paris"
+            },
+            {
+                country:"Israel",
+                capital:"Jerusalem"
+            }
+
+        ]
+    }
+    var son={};
+    son.__proto__=father;
+    son.arrObj[1].capital="New-York";
+    son.value=5;
+    console.log(son.arrObj[1].capital);
+    console.log(father.arrObj[1].capital);
+
+    son.arr[1]=77;
+    console.log(son);
+    console.log(father.value);
+//    son.__proto__.arr=[2,8,12];
+    console.log(father.arr);
+
+    </script>
+</body>
+</html>
