@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="crossCursesAngular.js"></script>
+
+    <style>
+        body{
+            margin: 0;
+            width: 100vw;
+            height: 100vh;
+        }
+        .container{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container" ng-app="crossCourses" ng-controller="crossCoursesCntr">
+    <table>
+        <tr><td></td>
+        <td ng-repeat="(k,v) in rates">{{k}}</td>
+        </tr>
+        <tr ng-repeat="(k,v) in rates">
+            <td>{{k}}</td>
+            <td ng-repeat="val in v">{{val}}</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
